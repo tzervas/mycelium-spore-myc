@@ -1,0 +1,595 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+  "emitted_items": [
+    "co-emit:Option",
+    "co-include:kind_str",
+    "RemoteError",
+    "impl RemoteError",
+    "kind_from_str",
+    "TempDirGuard",
+    "OrasTransport"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1,
+      "col": 1,
+      "category": "ReservedWord",
+      "rust_construct": "ReservedWord",
+      "snippet": "nodule spore.remote;",
+      "reason": "derived nodule path `spore.remote` has segment(s) [spore] colliding with a Mycelium reserved word — emitting them verbatim would fail to parse (`nodule spore.remote;` tokenizes the colliding word as a keyword, not an identifier); each colliding segment is escaped with the `_kw` suffix (now `spore_kw.remote`) rather than dropped, so distinct source files whose only differing segment is a reserved word (e.g. `l1.fuse` vs `l1.nodule`) stay distinguishable instead of both collapsing onto the same nodule path (G2/VR-5)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 34,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: cell :: RefCell ;",
+      "reason": "`use std.cell::RefCell` — `std.cell` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 35,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: collections :: { HashMap , HashSet } ;",
+      "reason": "`use std.collections::HashMap` — `std.collections` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.collections::HashSet` — `std.collections` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 36,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: path :: { Path , PathBuf } ;",
+      "reason": "`use std.path::Path` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.path::PathBuf` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 37,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: process :: Command ;",
+      "reason": "`use std.process::Command` — `std.process` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 39,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_core :: ContentHash ;",
+      "reason": "`use mycelium_core::ContentHash` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 40,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_proj :: ProjectKind ;",
+      "reason": "`use mycelium_proj::ProjectKind` — `mycelium_proj` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 42,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: { content_address , kind_str , ResolvedDep , SourceFile , Spore } ;",
+      "reason": "`use ::content_address` — `content_address` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:kind_str"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 42,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: { content_address , kind_str , ResolvedDep , SourceFile , Spore } ;",
+      "reason": "`use ::ResolvedDep` — `ResolvedDep` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:kind_str"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 42,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: { content_address , kind_str , ResolvedDep , SourceFile , Spore } ;",
+      "reason": "`use ::SourceFile` — `SourceFile` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:kind_str"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 42,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: { content_address , kind_str , ResolvedDep , SourceFile , Spore } ;",
+      "reason": "`use ::Spore` — `Spore` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:kind_str"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 46,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A remote-backend operation refusal — always explicit, never a partial/silent result (G2). Mirrors\"] # [doc = \" [`crate::registry::RegistryError`]'s exit-code + `Display` style so a `spore` CLI failure looks\"] # [doc = \" the same regardless of backend.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum RemoteError { # [doc = \" A malformed/unsafe input: an empty or unsafe `name`/`version`/reference component, an\"] # [doc = \" unrecognized registry scheme, or an empty version constraint (exit 3).\"] InvalidInput (String) , # [doc = \" No matching tag/artifact found (exit 4).\"] NotFound (String) , # [doc = \" A content-integrity failure: a bad `ContentHash`, a hash mismatch, a missing/extra object, a\"] # [doc = \" malformed dense-map encoding, or a recomputed-`spore_id` mismatch (exit 5).\"] Integrity (String) , # [doc = \" An immutability conflict (exit 6): [`publish_remote`] refuses to republish a **different**\"] # [doc = \" spore under an existing `name@version` (M-872) — parity with the local store's\"] # [doc = \" [`crate::registry::RegistryError::Conflict`] (ADR-003 / M-732). **Best-effort ceiling\"] # [doc = \" (Declared, VR-5):** it is a *client-side* pre-check (list-tags → compare `spore_id`); OCI tags\"] # [doc = \" are server-side mutable, so it is not a proven server invariant — never claimed `Proven`.\"] Conflict (String) , # [doc = \" A request this v0 backend honestly cannot satisfy — a SemVer range constraint (exit 64).\"] Unsupported (String) , # [doc = \" The `oras` CLI is not on `PATH` (exit 69).\"] ToolMissing (String) , # [doc = \" `oras` ran but failed, or the OCI wire exchange otherwise failed (exit 74).\"] Transport (String) , # [doc = \" A local filesystem error (temp files, materializing a resolved tree) (exit 66).\"] Io (String) , }",
+      "reason": "enum `RemoteError` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 46,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A remote-backend operation refusal — always explicit, never a partial/silent result (G2). Mirrors\"] # [doc = \" [`crate::registry::RegistryError`]'s exit-code + `Display` style so a `spore` CLI failure looks\"] # [doc = \" the same regardless of backend.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum RemoteError { # [doc = \" A malformed/unsafe input: an empty or unsafe `name`/`version`/reference component, an\"] # [doc = \" unrecognized registry scheme, or an empty version constraint (exit 3).\"] InvalidInput (String) , # [doc = \" No matching tag/artifact found (exit 4).\"] NotFound (String) , # [doc = \" A content-integrity failure: a bad `ContentHash`, a hash mismatch, a missing/extra object, a\"] # [doc = \" malformed dense-map encoding, or a recomputed-`spore_id` mismatch (exit 5).\"] Integrity (String) , # [doc = \" An immutability conflict (exit 6): [`publish_remote`] refuses to republish a **different**\"] # [doc = \" spore under an existing `name@version` (M-872) — parity with the local store's\"] # [doc = \" [`crate::registry::RegistryError::Conflict`] (ADR-003 / M-732). **Best-effort ceiling\"] # [doc = \" (Declared, VR-5):** it is a *client-side* pre-check (list-tags → compare `spore_id`); OCI tags\"] # [doc = \" are server-side mutable, so it is not a proven server invariant — never claimed `Proven`.\"] Conflict (String) , # [doc = \" A request this v0 backend honestly cannot satisfy — a SemVer range constraint (exit 64).\"] Unsupported (String) , # [doc = \" The `oras` CLI is not on `PATH` (exit 69).\"] ToolMissing (String) , # [doc = \" `oras` ran but failed, or the OCI wire exchange otherwise failed (exit 74).\"] Transport (String) , # [doc = \" A local filesystem error (temp files, materializing a resolved tree) (exit 66).\"] Io (String) , }",
+      "reason": "enum `RemoteError` derive(Eq): covered by co-occurring PartialEq → `fn eq_RemoteError` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 75,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "impl RemoteError { # [doc = \" The CLI exit code for this refusal.\"] # [must_use] pub fn exit_code (& self) -> u8 { match self { RemoteError :: InvalidInput (_) => 3 , RemoteError :: NotFound (_) => 4 , RemoteError :: Integrity (_) => 5 , RemoteError :: Conflict (_) => 6 , RemoteError :: Unsupported (_) => 64 , RemoteError :: ToolMissing (_) => 69 , RemoteError :: Transport (_) => 74 , RemoteError :: Io (_) => 66 , } } }",
+      "reason": "dropped non-doc attribute(s) on method `exit_code`: # [must_use]",
+      "item_name": "impl RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 92,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: fmt :: Display for RemoteError { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { match self { RemoteError :: InvalidInput (m) => write ! (f , \"input-error: {m}\") , RemoteError :: NotFound (m) => write ! (f , \"not-found: {m}\") , RemoteError :: Integrity (m) => write ! (f , \"integrity-error: {m}\") , RemoteError :: Conflict (m) => write ! (f , \"conflict: {m}\") , RemoteError :: Unsupported (m) => write ! (f , \"unsupported: {m}\") , RemoteError :: ToolMissing (m) => write ! (f , \"tool-missing: {m}\") , RemoteError :: Transport (m) => write ! (f , \"transport-error: {m}\") , RemoteError :: Io (m) => write ! (f , \"io-error: {m}\") , } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 107,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: error :: Error for RemoteError { }",
+      "reason": "trait-impl of non-prelude trait `Error` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 109,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "fn io < E : std :: fmt :: Display > (ctx : & str , e : E) -> RemoteError { RemoteError :: Io (format ! (\"{ctx}: {e}\")) }",
+      "reason": "type parameter `E` carries a bound — type_params/fn generics are bare identifiers only in this grammar fragment",
+      "item_name": "io"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 115,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" One entry in a [`DenseMap`]'s object list: a source file's repo-relative path plus its\"] # [doc = \" content-address (ADR-003 raw-byte BLAKE3, same as [`SourceFile`]).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct ObjectRef { # [doc = \" Path relative to the project root (forward-slashed; matches [`SourceFile::path`]).\"] pub rel_path : String , # [doc = \" `blake3:<hex>` of the object's bytes.\"] pub content_hash : ContentHash , }",
+      "reason": "struct `ObjectRef` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "ObjectRef"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 125,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl ObjectRef { # [doc = \" The OCI blob title this object maps to on push/pull (ADR-037 §2): `<blake3-hex>.myco`.\"] # [must_use] pub fn oci_title (& self) -> String { title_from_hash (& self . content_hash) } }",
+      "reason": "no member of this impl block could be transpiled (1 sub-issue(s)): impl method `oci_title` body: field projection `self.content_hash` on `ObjectRef` — not an in-file single-ctor struct that emits (an enum / external / non-resolvable type has no constructor to `match` against)",
+      "item_name": "ObjectRef"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 133,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The DN-28 dense-map: the spore's DAG (spore identity, project kind, germination surface,\"] # [doc = \" content-addressed objects, dependency edges) plus the carried (non-identity) `name`/`version`\"] # [doc = \" metadata — the payload that becomes the OCI **config** blob (ADR-037 §2).\"] # [doc = \"\"] # [doc = \" **Not identity-bearing on its own** — `spore_id` is *recorded* here but is only trustworthy once\"] # [doc = \" [`verify_and_reconstruct`] has recomputed it from the fetched objects via\"] # [doc = \" [`crate::content_address`] (the single canonical encoding; never re-implemented, DRY).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct DenseMap { # [doc = \" The dense-map wire-format tag (`\\\"mycelium-densemap-v1\\\"`), carried so a decoder that reads a\"] # [doc = \" mismatched version fails loudly rather than mis-parsing (G2).\"] pub format_version : & 'static str , # [doc = \" The spore identity this dense-map claims (ADR-003) — verified, not trusted, by\"] # [doc = \" [`verify_and_reconstruct`].\"] pub spore_id : ContentHash , # [doc = \" The project shape.\"] pub kind : ProjectKind , # [doc = \" The published package name (metadata; not identity).\"] pub name : String , # [doc = \" The published version label, if any (metadata; not identity).\"] pub version : Option < String > , # [doc = \" The germination surface (sorted).\"] pub surface : Vec < String > , # [doc = \" The content-addressed objects (sorted by `rel_path`) — one per OCI blob layer.\"] pub objects : Vec < ObjectRef > , # [doc = \" The resolved dependency edges (sorted by name).\"] pub deps : Vec < ResolvedDep > , }",
+      "reason": "struct `DenseMap` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "DenseMap"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 162,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The dense-map wire-format tag. Bumping this (e.g. to `-v2`) is an append-only supersession, same\"] # [doc = \" discipline as [`crate::content_address`]'s `v0`→`v1` header.\"] const DENSE_MAP_HEADER : & str = \"mycelium-densemap-v1\\n\" ;",
+      "reason": "top-level `const DENSE_MAP_HEADER` — co-emit (ORACLE-R1 A4) only covers plain unsigned integer types (`u8`/`u16`/`u32`/`u64`/`u128`/`usize`); other types have no const item production and no faithful zero-arg-fn encoding (gap, never fabricate)",
+      "item_name": "DENSE_MAP_HEADER"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 166,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The blob title an object with this content hash maps to on the OCI wire (ADR-037 §2):\"] # [doc = \" `<blake3-hex>.myco`. The single source of truth [`ObjectRef::oci_title`] / [`ObjectBlob::oci_title`]\"] # [doc = \" both call.\"] fn title_from_hash (hash : & ContentHash) -> String { format ! (\"{}.myco\" , hash . digest ()) }",
+      "reason": "method call `.digest(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__digest` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `digest(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "title_from_hash"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 173,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Parse an OCI blob title (as minted by [`title_from_hash`]) back into the content hash it names.\"] # [doc = \" `None` if `title` does not have the `.myco` suffix or the hex before it is not a well-formed\"] # [doc = \" BLAKE3 digest (DN-40 wave-2 algorithm-aware check) — never a silent best-effort guess.\"] # [must_use] pub fn content_hash_from_title (title : & str) -> Option < ContentHash > { let hex = title . strip_suffix (\".myco\") ? ; ContentHash :: parse_digest (& format ! (\"blake3:{hex}\")) }",
+      "reason": "unsupported expression form `title . strip_suffix (\".myco\") ?`",
+      "item_name": "content_hash_from_title"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 182,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Append one length-prefixed (netstring-style) field: `<byte-length>:<bytes>`. Same discipline as\"] # [doc = \" [`crate::push_field`] — the byte count removes all delimiter ambiguity, so an embedded space or\"] # [doc = \" newline in a free-text field (a `rel_path`, dependency `name`, …) cannot forge a field boundary.\"] # [doc = \" **No trailing `\\\\n`** is appended here (callers place the terminator explicitly, since some\"] # [doc = \" callers chain a key prefix before this and a literal after).\"] fn push_len_field (out : & mut String , v : & str) { out . push_str (& format ! (\"{}:{v}\\n\" , v . len ())) ; }",
+      "reason": "mutating method body statement is neither a `let`, a supported `self.<field>`/`*<param>` re-assignment, nor (in tail position) the method's own return value — value-threading deliberately refuses any shape outside a flat re-assignment sequence rather than risk an unsound rebind (DN-125 §6.1, never-silent G2/VR-5)",
+      "item_name": "push_len_field"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 191,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Encode a [`DenseMap`] into its canonical, deterministic, injective, length-prefixed bytes\"] # [doc = \" (ADR-037 §2) — the OCI config blob payload. **Injectivity is the whole contract**, same as\"] # [doc = \" [`crate::content_address`]: every free-text field (`name`, `version`, `rel_path`, dependency\"] # [doc = \" `name`/`phylum`/`hash`/`version`) is length-prefixed so an embedded space/newline/colon cannot\"] # [doc = \" alias two distinct dense-maps onto one encoding. Fixed-vocabulary fields (`kind`) and\"] # [doc = \" already-charset-restricted fields (`ContentHash`, which cannot contain a newline by construction\"] # [doc = \" — [`ContentHash::parse`]) are written as plain lines. Sections are sorted here (`surface`,\"] # [doc = \" `objects` by `rel_path`, `deps` by name) regardless of input order, so two [`DenseMap`]s with the\"] # [doc = \" same logical content always encode identically.\"] # [must_use] pub fn encode_dense_map (dm : & DenseMap) -> Vec < u8 > { let mut surface = dm . surface . clone () ; surface . sort () ; let mut objects = dm . objects . clone () ; objects . sort_by (| a , b | a . rel_path . cmp (& b . rel_path)) ; let mut deps = dm . deps . clone () ; deps . sort_by (| a , b | a . name . cmp (& b . name)) ; let mut out = String :: from (DENSE_MAP_HEADER) ; out . push_str (& format ! (\"spore_id:{}\\n\" , dm . spore_id . as_str ())) ; out . push_str (& format ! (\"kind:{}\\n\" , kind_str (dm . kind))) ; out . push_str (\"name:\") ; push_len_field (& mut out , & dm . name) ; push_opt_field (& mut out , \"version:\" , dm . version . as_deref ()) ; out . push_str (& format ! (\"surface {}\\n\" , surface . len ())) ; for s in & surface { push_len_field (& mut out , s) ; } out . push_str (& format ! (\"objects {}\\n\" , objects . len ())) ; for o in & objects { out . push_str (\"objpath:\") ; push_len_field (& mut out , & o . rel_path) ; out . push_str (& format ! (\"objhash:{}\\n\" , o . content_hash . as_str ())) ; } out . push_str (& format ! (\"deps {}\\n\" , deps . len ())) ; for d in & deps { out . push_str (\"depname:\") ; push_len_field (& mut out , & d . name) ; out . push_str (\"depphylum:\") ; push_len_field (& mut out , & d . phylum) ; out . push_str (\"dephash:\") ; push_len_field (& mut out , & d . hash) ; push_opt_field (& mut out , \"depversion:\" , d . version . as_deref ()) ; } out . into_bytes () }",
+      "reason": "Rust ownership/identity-conversion no-op method `.clone()` has no Mycelium free-function/prim referent (value semantics — ADR-003); desugaring it to a bare `clone(recv)` would fabricate an unknown prim (`unknown function/constructor/prim `clone`` — verified against the oracle), so it is gapped, never fake-emitted (G2/VR-5)",
+      "item_name": "encode_dense_map"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 242,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Encode an `Option<&str>` field as `<key><\\\"none\\\"|\\\"some:\\\"+len-prefixed>\\\\n`. The `none`/`some`\"] # [doc = \" literals are fixed vocabulary (never user data), so no injectivity risk; this is what lets\"] # [doc = \" [`decode_dense_map`] distinguish `None` from `Some(\\\"\\\")` unambiguously.\"] fn push_opt_field (out : & mut String , key : & str , v : Option < & str >) { out . push_str (key) ; match v { None => out . push_str (\"none\\n\") , Some (s) => { out . push_str (\"some:\") ; push_len_field (out , s) ; } } }",
+      "reason": "mutating method body statement is neither a `let`, a supported `self.<field>`/`*<param>` re-assignment, nor (in tail position) the method's own return value — value-threading deliberately refuses any shape outside a flat re-assignment sequence rather than risk an unsound rebind (DN-125 §6.1, never-silent G2/VR-5)",
+      "item_name": "push_opt_field"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 256,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "# [doc = \" A byte-cursor over an encoded dense-map. Operates on raw bytes (not `str::lines()`) because\"] # [doc = \" length-prefixed field *values* may legitimately contain `\\\\n` — only the cursor's own structural\"] # [doc = \" bytes (headers, counts, key literals) are guaranteed newline-free.\"] struct Cursor < 'a > { buf : & 'a [u8] , pos : usize , }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "Cursor"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 264,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "impl < 'a > Cursor < 'a > { fn remaining (& self) -> & 'a [u8] { & self . buf [self . pos ..] } fn at_end (& self) -> bool { self . pos == self . buf . len () } # [doc = \" Consume an exact literal, or fail with a positioned [`RemoteError::Integrity`].\"] fn expect_literal (& mut self , lit : & str) -> Result < () , RemoteError > { let b = lit . as_bytes () ; if self . remaining () . len () >= b . len () && & self . remaining () [.. b . len ()] == b { self . pos += b . len () ; Ok (()) } else { Err (RemoteError :: Integrity (format ! (\"dense-map decode: expected {lit:?} at byte offset {} (malformed or truncated encoding)\" , self . pos))) } } # [doc = \" Try to consume `lit`; `true`/advances on match, `false`/no-op otherwise (never errors).\"] fn try_consume (& mut self , lit : & str) -> bool { let b = lit . as_bytes () ; if self . remaining () . len () >= b . len () && & self . remaining () [.. b . len ()] == b { self . pos += b . len () ; true } else { false } } # [doc = \" Read raw bytes up to (and consuming) the next `\\\\n`, as a UTF-8 `String`. For structural\"] # [doc = \" lines only (`spore_id:`/`kind:`/section-count headers) — these are charset-restricted by\"] # [doc = \" construction and never contain an embedded newline.\"] fn read_raw_line (& mut self) -> Result < String , RemoteError > { let rest = self . remaining () ; let nl = rest . iter () . position (| & b | b == b'\\n') . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: unterminated line at byte offset {} (missing newline — truncated encoding)\" , self . pos)) }) ? ; let s = std :: str :: from_utf8 (& rest [.. nl]) . map_err (| _ | { RemoteError :: Integrity (format ! (\"dense-map decode: non-UTF-8 line at byte offset {}\" , self . pos)) }) ? . to_owned () ; self . pos += nl + 1 ; Ok (s) } # [doc = \" Read a `<key> <N>\\\\n` section-count header, validating `key`. Returns `N`.\"] fn read_count_line (& mut self , key : & str) -> Result < usize , RemoteError > { let line = self . read_raw_line () ? ; let prefix = format ! (\"{key} \") ; let rest = line . strip_prefix (prefix . as_str ()) . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: expected `{key} <N>` section header, got {line:?}\")) }) ? ; rest . parse :: < usize > () . map_err (| _ | { RemoteError :: Integrity (format ! (\"dense-map decode: bad count {rest:?} in `{key}` section header\")) }) } # [doc = \" Read a `<byte-length>:<bytes>\\\\n` length-prefixed field, returning the decoded value. Strict:\"] # [doc = \" a missing `:`, a non-digit/overflowing length, a truncated value, non-UTF-8 bytes, or a\"] # [doc = \" missing trailing `\\\\n` are each an explicit, positioned error (never silent truncation/default).\"] fn read_len_field (& mut self) -> Result < String , RemoteError > { let rest = self . remaining () ; let colon = rest . iter () . position (| & b | b == b':') . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: malformed length-prefixed field at byte offset {} — missing `:`\" , self . pos)) }) ? ; let len_bytes = & rest [.. colon] ; if len_bytes . is_empty () || ! len_bytes . iter () . all (u8 :: is_ascii_digit) { return Err (RemoteError :: Integrity (format ! (\"dense-map decode: malformed length prefix {:?} at byte offset {}\" , String :: from_utf8_lossy (len_bytes) , self . pos))) ; } let len_str = std :: str :: from_utf8 (len_bytes) . expect (\"ascii digits are valid UTF-8\") ; let len : usize = len_str . parse () . map_err (| _ | { RemoteError :: Integrity (format ! (\"dense-map decode: length prefix {len_str:?} at byte offset {} does not fit a usize\" , self . pos)) }) ? ; let value_start = colon + 1 ; if rest . len () < value_start + len + 1 { return Err (RemoteError :: Integrity (format ! (\"dense-map decode: truncated length-prefixed field (declared {len} byte(s)) at byte offset {}\" , self . pos))) ; } let value = std :: str :: from_utf8 (& rest [value_start .. value_start + len]) . map_err (| _ | { RemoteError :: Integrity (format ! (\"dense-map decode: length-prefixed field at byte offset {} is not valid UTF-8\" , self . pos)) }) ? . to_owned () ; if rest [value_start + len] != b'\\n' { return Err (RemoteError :: Integrity (format ! (\"dense-map decode: length-prefixed field at byte offset {} is missing its trailing newline \\\n                 (a corrupt length prefix would otherwise misalign every following field)\" , self . pos))) ; } self . pos += value_start + len + 1 ; Ok (value) } }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "Cursor < 'a >"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 390,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "# [doc = \" Read a `<key>none\\\\n` / `<key>some:<len-prefixed>\\\\n` optional field, the decode counterpart of\"] # [doc = \" [`push_opt_field`].\"] fn read_opt_field (c : & mut Cursor < '_ > , key : & str) -> Result < Option < String > , RemoteError > { c . expect_literal (key) ? ; if c . try_consume (\"none\\n\") { Ok (None) } else if c . try_consume (\"some:\") { Ok (Some (c . read_len_field () ?)) } else { Err (RemoteError :: Integrity (format ! (\"dense-map decode: expected `none` or `some:` after `{key}` at byte offset {}\" , c . pos))) } }",
+      "reason": "generic type path `Cursor < '_ >` — type argument `'_` is not a type (lifetime / const-generic / associated-type binding-or-constraint); `type_args` admits only type_refs, so left an explicit gap (VR-5)",
+      "item_name": "read_opt_field"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 415,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Decode bytes produced by [`encode_dense_map`] back into a [`DenseMap`]. **Strict, total, and\"] # [doc = \" never-silent** (G2), modeled on [`crate::registry::parse_entry`]: a bad header, a bad/duplicate\"] # [doc = \" count, a malformed length prefix, a truncated or non-UTF-8 field, a malformed `ContentHash`, a\"] # [doc = \" duplicate object/dependency entry, or trailing bytes after the last section is each an explicit,\"] # [doc = \" positioned [`RemoteError::Integrity`] naming the fault — never a silent default, truncation, or\"] # [doc = \" last-wins.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RemoteError::Integrity`] on any malformed input (see above); this function performs no I/O.\"] pub fn decode_dense_map (bytes : & [u8]) -> Result < DenseMap , RemoteError > { let mut c = Cursor { buf : bytes , pos : 0 } ; c . expect_literal (DENSE_MAP_HEADER) . map_err (| _ | { RemoteError :: Integrity (\"dense-map decode: bad header — the first line is not `mycelium-densemap-v1` (not a \\\n             mycelium dense-map, or an incompatible format version)\" . to_owned () ,) }) ? ; let spore_id_line = c . read_raw_line () ? ; let spore_id_str = spore_id_line . strip_prefix (\"spore_id:\") . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: expected a `spore_id:<hash>` line, got {spore_id_line:?}\")) }) ? ; let spore_id = ContentHash :: parse_digest (spore_id_str) . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: `spore_id` value {spore_id_str:?} is not a well-formed content hash\")) }) ? ; let kind_line = c . read_raw_line () ? ; let kind_val = kind_line . strip_prefix (\"kind:\") . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: expected a `kind:<phylum|program|script>` line, got {kind_line:?}\")) }) ? ; let kind = kind_from_str (kind_val) . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: unrecognized `kind` value {kind_val:?}\")) }) ? ; c . expect_literal (\"name:\") ? ; let name = c . read_len_field () ? ; let version = read_opt_field (& mut c , \"version:\") ? ; let n_surface = c . read_count_line (\"surface\") ? ; let mut surface = Vec :: with_capacity (n_surface) ; for _ in 0 .. n_surface { surface . push (c . read_len_field () ?) ; } let n_objects = c . read_count_line (\"objects\") ? ; let mut objects = Vec :: with_capacity (n_objects) ; let mut seen_paths : HashSet < String > = HashSet :: with_capacity (n_objects) ; for _ in 0 .. n_objects { c . expect_literal (\"objpath:\") ? ; let rel_path = c . read_len_field () ? ; let hash_line = c . read_raw_line () ? ; let hash_str = hash_line . strip_prefix (\"objhash:\") . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: expected an `objhash:<hash>` line, got {hash_line:?}\")) }) ? ; let content_hash = ContentHash :: parse_digest (hash_str) . ok_or_else (| | { RemoteError :: Integrity (format ! (\"dense-map decode: object {rel_path:?} has a malformed content hash {hash_str:?}\")) }) ? ; if ! seen_paths . insert (rel_path . clone ()) { return Err (RemoteError :: Integrity (format ! (\"dense-map decode: duplicate object entry for rel_path {rel_path:?} — a dense-map's \\\n                 objects are a set, not a multiset (G2)\"))) ; } objects . push (ObjectRef { rel_path , content_hash , }) ; } let n_deps = c . read_count_line (\"deps\") ? ; let mut deps = Vec :: with_capacity (n_deps) ; let mut seen_deps : HashSet < String > = HashSet :: with_capacity (n_deps) ; for _ in 0 .. n_deps { c . expect_literal (\"depname:\") ? ; let dep_name = c . read_len_field () ? ; c . expect_literal (\"depphylum:\") ? ; let phylum = c . read_len_field () ? ; c . expect_literal (\"dephash:\") ? ; let hash = c . read_len_field () ? ; let dep_version = read_opt_field (& mut c , \"depversion:\") ? ; if ! seen_deps . insert (dep_name . clone ()) { return Err (RemoteError :: Integrity (format ! (\"dense-map decode: duplicate dependency entry for name {dep_name:?} (G2)\"))) ; } deps . push (ResolvedDep { name : dep_name , phylum , hash , version : dep_version , }) ; } if ! c . at_end () { return Err (RemoteError :: Integrity (format ! (\"dense-map decode: {} trailing byte(s) after the `deps` section — the encoding is not \\\n             self-terminating for this input (G2)\" , c . buf . len () - c . pos))) ; } Ok (DenseMap { format_version : \"mycelium-densemap-v1\" , spore_id , kind , name , version , surface , objects , deps , }) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "decode_dense_map"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 544,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" One source object's bytes, ready to push as an OCI blob layer.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct ObjectBlob { # [doc = \" `blake3:<hex>` of `bytes` (ADR-003).\"] pub content_hash : ContentHash , # [doc = \" Path relative to the project root (matches the corresponding [`ObjectRef::rel_path`]).\"] pub rel_path : String , # [doc = \" The object's raw bytes.\"] pub bytes : Vec < u8 > , }",
+      "reason": "struct `ObjectBlob` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "ObjectBlob"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 555,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl ObjectBlob { # [doc = \" The OCI blob title this object pushes/pulls under (ADR-037 §2): `<blake3-hex>.myco`.\"] # [must_use] pub fn oci_title (& self) -> String { title_from_hash (& self . content_hash) } }",
+      "reason": "no member of this impl block could be transpiled (1 sub-issue(s)): impl method `oci_title` body: field projection `self.content_hash` on `ObjectBlob` — not an in-file single-ctor struct that emits (an enum / external / non-resolvable type has no constructor to `match` against)",
+      "item_name": "ObjectBlob"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 563,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Build a [`DenseMap`] + its [`ObjectBlob`]s from a built [`Spore`], reading each source file's\"] # [doc = \" bytes from `project_dir`. Every object's on-disk bytes are re-hashed and asserted to match the\"] # [doc = \" spore's recorded [`SourceFile::hash`] — a project directory that has drifted since the spore was\"] # [doc = \" built (edited/deleted source) is refused, never silently published under a stale address (G2).\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RemoteError::Io`] if a source file cannot be read; [`RemoteError::Integrity`] if a source\"] # [doc = \" file's current bytes do not hash to the spore's recorded address for it.\"] pub fn build_dense_map (spore : & Spore , project_dir : & Path ,) -> Result < (DenseMap , Vec < ObjectBlob >) , RemoteError > { let mut objects = Vec :: with_capacity (spore . sources . len ()) ; let mut blobs = Vec :: with_capacity (spore . sources . len ()) ; for src in & spore . sources { let full = project_dir . join (& src . path) ; let bytes = std :: fs :: read (& full) . map_err (| e | io (& full . display () . to_string () , e)) ? ; let hex = blake3 :: hash (& bytes) . to_hex () ; let actual = ContentHash :: from_parts (\"blake3\" , hex . as_str ()) . expect (\"blake3 hex is a valid digest\") ; if actual != src . hash { return Err (RemoteError :: Integrity (format ! (\"source {} now hashes to {} but the spore records {} — the project directory has \\\n                 drifted since the spore was built; refusing to publish a stale/mismatched object (G2)\" , src . path , actual . as_str () , src . hash . as_str ()))) ; } objects . push (ObjectRef { rel_path : src . path . clone () , content_hash : src . hash . clone () , }) ; blobs . push (ObjectBlob { content_hash : src . hash . clone () , rel_path : src . path . clone () , bytes , }) ; } objects . sort_by (| a , b | a . rel_path . cmp (& b . rel_path)) ; blobs . sort_by (| a , b | a . rel_path . cmp (& b . rel_path)) ; let dense_map = DenseMap { format_version : \"mycelium-densemap-v1\" , spore_id : spore . id . clone () , kind : spore . kind , name : spore . name . clone () , version : spore . version . clone () , surface : spore . surface . clone () , objects , deps : spore . deps . clone () , } ; Ok ((dense_map , blobs)) }",
+      "reason": "qualified/associated-function call `Vec :: with_capacity` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "build_dense_map"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 618,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The verified, reconstructed result of a resolve: the recovered source tree plus the dense-map it\"] # [doc = \" came from (its `spore_id` is now trustworthy — every object was hash-checked and the DAG\"] # [doc = \" recomputed to match, per [`verify_and_reconstruct`]).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct Reconstructed { # [doc = \" The verified spore identity (ADR-003).\"] pub spore_id : ContentHash , # [doc = \" The recovered `(rel_path, bytes)` source files.\"] pub sources : Vec < (String , Vec < u8 >) > , # [doc = \" The dense-map this was reconstructed from.\"] pub dense_map : DenseMap , }",
+      "reason": "struct `Reconstructed` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "Reconstructed"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 631,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Fetch-and-verify (ADR-037 §2, the load-bearing check): given a decoded `dense_map` and the\"] # [doc = \" `fetched` `(title, bytes)` blobs a transport pulled, verify **every** declared object is present\"] # [doc = \" with matching bytes, that no undescribed/duplicate blob was fetched, and that the reconstructed\"] # [doc = \" source set recomputes — via [`crate::content_address`] (the single canonical encoding) — to the\"] # [doc = \" dense-map's declared `spore_id`. **Never-silent (G2):** a missing object, a byte mismatch, an\"] # [doc = \" extra/duplicate blob, or a `spore_id` mismatch is an explicit [`RemoteError`], never a silent\"] # [doc = \" partial reconstruction.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RemoteError::Integrity`] for a duplicate fetched title, a duplicate dense-map object, a byte\"] # [doc = \" mismatch, an extra/undescribed blob, or a `spore_id` mismatch; [`RemoteError::NotFound`] if a\"] # [doc = \" declared object has no matching fetched blob.\"] pub fn verify_and_reconstruct (dense_map : DenseMap , fetched : & [(String , Vec < u8 >)] ,) -> Result < Reconstructed , RemoteError > { let mut by_title : HashMap < & str , & [u8] > = HashMap :: with_capacity (fetched . len ()) ; for (title , bytes) in fetched { if by_title . insert (title . as_str () , bytes . as_slice ()) . is_some () { return Err (RemoteError :: Integrity (format ! (\"fetched blob title {title:?} appears more than once among the pulled layers (G2)\"))) ; } } let mut declared_titles : HashSet < String > = HashSet :: with_capacity (dense_map . objects . len ()) ; let mut sources : Vec < (String , Vec < u8 >) > = Vec :: with_capacity (dense_map . objects . len ()) ; let mut rebuilt : Vec < SourceFile > = Vec :: with_capacity (dense_map . objects . len ()) ; for obj in & dense_map . objects { let title = obj . oci_title () ; if ! declared_titles . insert (title . clone ()) { return Err (RemoteError :: Integrity (format ! (\"dense-map declares object {:?} more than once (title {title:?}) — a corrupt or \\\n                 adversarial dense-map (G2)\" , obj . rel_path))) ; } let bytes = by_title . get (title . as_str ()) . ok_or_else (| | { RemoteError :: NotFound (format ! (\"dense-map object {} ({}) has no matching fetched blob (title {title:?}) — a missing \\\n                 object (G2)\" , obj . rel_path , obj . content_hash . as_str ())) }) ? ; let hex = blake3 :: hash (bytes) . to_hex () ; let actual = ContentHash :: from_parts (\"blake3\" , hex . as_str ()) . expect (\"blake3 hex is a valid digest\") ; if actual != obj . content_hash { return Err (RemoteError :: Integrity (format ! (\"fetched object {} does not hash to its declared content address {} (got {}) — \\\n                 tampered or corrupt (G2)\" , obj . rel_path , obj . content_hash . as_str () , actual . as_str ()))) ; } sources . push ((obj . rel_path . clone () , bytes . to_vec ())) ; rebuilt . push (SourceFile { path : obj . rel_path . clone () , hash : obj . content_hash . clone () , }) ; } if let Some ((extra_title , _)) = fetched . iter () . find (| (t , _) | ! declared_titles . contains (t)) { return Err (RemoteError :: Integrity (format ! (\"fetched blob {extra_title:?} is not described by any dense-map object — an \\\n             extra/undescribed layer (G2)\"))) ; } rebuilt . sort_by (| a , b | a . path . cmp (& b . path)) ; let recomputed = content_address (dense_map . kind , & dense_map . surface , & rebuilt , & dense_map . deps ,) ; if recomputed != dense_map . spore_id { return Err (RemoteError :: Integrity (format ! (\"reconstructed spore recomputes to spore_id {} but the dense-map declares {} — an \\\n             identity mismatch (a substituted object, a tampered dense-map, or drifted deps/surface; G2)\" , recomputed . as_str () , dense_map . spore_id . as_str ()))) ; } Ok (Reconstructed { spore_id : dense_map . spore_id . clone () , sources , dense_map , }) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "verify_and_reconstruct"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 728,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The fetched-layer shape a [`OciTransport::pull`] returns: one `(title, bytes)` pair per OCI blob\"] # [doc = \" layer. Factored out (clippy `type_complexity`) — see [`ObjectBlob::oci_title`] for the title\"] # [doc = \" convention.\"] pub type PulledLayers = Vec < (String , Vec < u8 >) > ;",
+      "reason": "`type PulledLayers = ...` alias — Mycelium's `type_item` always introduces a new nominal sum type via `'=' constructor ('|' constructor)*`; a bare alias to an existing type would fabricate a sum type where none exists semantically",
+      "item_name": "PulledLayers"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 733,
+      "col": 1,
+      "category": "Trait",
+      "rust_construct": "Trait",
+      "snippet": "# [doc = \" The OCI wire-transport driver, behind a trait so `oras` (v0) can be replaced by a future\"] # [doc = \" pure-Rust client append-only, without touching the registry design above (ADR-037 §4/KC-3).\"] pub trait OciTransport { # [doc = \" Push `config` (the encoded dense-map) and `layers` (the objects) to `reference`\"] # [doc = \" (`<repo>:<tag>`), returning the manifest digest.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" A transport-specific [`RemoteError`] (never a silent partial push).\"] fn push (& self , reference : & str , config : & [u8] , layers : & [ObjectBlob] ,) -> Result < String , RemoteError > ; # [doc = \" Pull `reference`, returning the config bytes (the encoded dense-map) and the fetched\"] # [doc = \" `(title, bytes)` layers.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" A transport-specific [`RemoteError`] (never a silent partial pull).\"] fn pull (& self , reference : & str) -> Result < (Vec < u8 > , PulledLayers) , RemoteError > ; # [doc = \" List the tags published under `repo` (`<base>/<name>`, no tag).\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" A transport-specific [`RemoteError`].\"] fn list_tags (& self , repo : & str) -> Result < Vec < String > , RemoteError > ; }",
+      "reason": "trait `OciTransport` method `push` signature has no confirmed mapping (a trait-body `Self`/`self` has no concrete referent in this grammar; `self` parameter with no enclosing impl/trait context)",
+      "item_name": "OciTransport"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 762,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Spawn `oras`, mapping a missing binary to [`RemoteError::ToolMissing`] (never a silent skip) and\"] # [doc = \" any other spawn failure to [`RemoteError::Transport`].\"] fn spawn_oras (mut cmd : Command) -> Result < std :: process :: Output , RemoteError > { cmd . output () . map_err (| e | { if e . kind () == std :: io :: ErrorKind :: NotFound { RemoteError :: ToolMissing (\"the `oras` CLI is not on PATH — it is the v0 OCI wire-transport driver (ADR-037 §1); \\\n                 install it (https://oras.land) or publish/resolve against a local (non-`oci://`/`ghcr://`) \\\n                 registry path instead\" . to_owned () ,) } else { RemoteError :: Transport (format ! (\"failed to spawn `oras`: {e}\")) } }) }",
+      "reason": "qualified type path `std :: process :: Output` — collapsing to its last segment would risk colliding with an unrelated same-named local type (e.g. `std::cmp::Ordering` vs a local `Ordering`); left an explicit gap rather than guessed (VR-5)",
+      "item_name": "spawn_oras"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 779,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Assert `output` succeeded, else an explicit [`RemoteError::Transport`] naming `what` and the\"] # [doc = \" stderr tail (never a silent skip of a failed OCI operation).\"] fn require_success (output : & std :: process :: Output , what : & str) -> Result < () , RemoteError > { if output . status . success () { return Ok (()) ; } let stderr = String :: from_utf8_lossy (& output . stderr) ; Err (RemoteError :: Transport (format ! (\"`{what}` exited with {:?}: {}\" , output . status . code () , tail_lines (& stderr , 20)))) }",
+      "reason": "qualified type path `std :: process :: Output` — collapsing to its last segment would risk colliding with an unrelated same-named local type (e.g. `std::cmp::Ordering` vs a local `Ordering`); left an explicit gap rather than guessed (VR-5)",
+      "item_name": "require_success"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 793,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" The last `n` lines of `s` (for a bounded, readable error message from a possibly-long `oras`\"] # [doc = \" stderr stream).\"] fn tail_lines (s : & str , n : usize) -> String { let lines : Vec < & str > = s . lines () . collect () ; let start = lines . len () . saturating_sub (n) ; lines [start ..] . join (\"\\n\") }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "tail_lines"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 801,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Map a **failed** `oras` [`std::process::Output`] to a [`RemoteError`], distinguishing an OCI\"] # [doc = \" \\\"not found\\\" (a missing repository or tag — a *normal, expected* condition when checking whether\"] # [doc = \" something is already published) from a genuine transport/auth failure. Used where \\\"absent\\\" is a\"] # [doc = \" legitimate answer (the immutability pre-check, resolve of a missing tag), so a first publish\"] # [doc = \" isn't mistaken for an error.\"] # [doc = \"\"] # [doc = \" The distinction is **grounded** in the OCI distribution spec's `NAME_UNKNOWN`/`MANIFEST_UNKNOWN`\"] # [doc = \" errors, which both `registry:2` and GHCR surface with the substrings matched below (verified\"] # [doc = \" 2026-07-01 against each). An auth/permission failure (`unauthorized`/`denied`/`401`/`403`)\"] # [doc = \" deliberately does **not** match, so it stays a propagated [`RemoteError::Transport`] — a missing\"] # [doc = \" credential is **never silently read as \\\"nothing is published\\\"** (G2/VR-5), which would otherwise\"] # [doc = \" let the immutability check be bypassed by an auth error.\"] fn classify_oras_failure (output : & std :: process :: Output , what : & str) -> RemoteError { let stderr = String :: from_utf8_lossy (& output . stderr) ; let low = stderr . to_ascii_lowercase () ; let not_found = low . contains (\"not found\") || low . contains (\"name unknown\") || low . contains (\"not known to registry\") || low . contains (\"name_unknown\") || low . contains (\"manifest unknown\") || low . contains (\"manifest_unknown\") ; let msg = format ! (\"`{what}` exited with {:?}: {}\" , output . status . code () , tail_lines (& stderr , 20)) ; if not_found { RemoteError :: NotFound (msg) } else { RemoteError :: Transport (msg) } }",
+      "reason": "qualified type path `std :: process :: Output` — collapsing to its last segment would risk colliding with an unrelated same-named local type (e.g. `std::cmp::Ordering` vs a local `Ordering`); left an explicit gap rather than guessed (VR-5)",
+      "item_name": "classify_oras_failure"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 834,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Preflight-check that `oras` is on `PATH` and runnable — a small, explicit \\\"is the v0 transport\"] # [doc = \" prerequisite present\\\" probe (ADR-037 §5), usable ahead of a push/pull for a friendlier failure.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RemoteError::ToolMissing`] if `oras` is absent; [`RemoteError::Transport`] if it is present but\"] # [doc = \" `oras version` fails.\"] pub fn oras_preflight () -> Result < () , RemoteError > { let mut cmd = Command :: new (\"oras\") ; cmd . arg (\"version\") ; let out = spawn_oras (cmd) ? ; require_success (& out , \"oras version\") }",
+      "reason": "qualified/associated-function call `Command :: new` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "oras_preflight"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 847,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn unique_temp_dir (tag : & str) -> Result < PathBuf , RemoteError > { let nanos = std :: time :: SystemTime :: now () . duration_since (std :: time :: UNIX_EPOCH) . unwrap_or_default () . as_nanos () ; let dir = std :: env :: temp_dir () . join (format ! (\"myc-{tag}-{}-{nanos}\" , std :: process :: id ())) ; std :: fs :: create_dir_all (& dir) . map_err (| e | io (& dir . display () . to_string () , e)) ? ; Ok (dir) }",
+      "reason": "method call `.as_nanos(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__as_nanos` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `as_nanos(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "unique_temp_dir"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 861,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl Drop for TempDirGuard { fn drop (& mut self) { let _ = std :: fs :: remove_dir_all (& self . 0) ; } }",
+      "reason": "trait-impl of non-prelude trait `Drop` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "TempDirGuard"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 867,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Find a `Digest:` line in `oras push`'s combined output (its convention for reporting the pushed\"] # [doc = \" manifest digest).\"] fn extract_digest (text : & str) -> Option < String > { text . lines () . find_map (| line | { line . trim () . strip_prefix (\"Digest:\") . map (| d | d . trim () . to_owned ()) }) }",
+      "reason": "method call `.find_map(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__find_map` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `find_map(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "extract_digest"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 877,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" The `oras`-CLI-driven [`OciTransport`] (ADR-037 §1/§4 — v0's transport). Every operation\"] # [doc = \" preflights `oras`'s presence and surfaces a nonzero exit as an explicit [`RemoteError::Transport`]\"] # [doc = \" (never a silent skip). Guarantee posture: **`Declared`** — correctness rests on `oras`'s own OCI\"] # [doc = \" conformance, which this crate does not itself prove.\"] pub struct OrasTransport { # [doc = \" Pass `--plain-http` to every `oras` invocation (for a local/dev HTTP registry, never a\"] # [doc = \" production GHCR target — [`parse_registry`] sets this only for `localhost`/`127.*` hosts).\"] pub plain_http : bool , }",
+      "reason": "struct `OrasTransport` named field(s) `plain_http` emitted positionally as `OrasTransport(Bool)` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped (matches `lib/std/*.myc` hand-ports)",
+      "item_name": "OrasTransport"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 887,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl OrasTransport { fn maybe_plain_http (& self , cmd : & mut Command) { if self . plain_http { cmd . arg (\"--plain-http\") ; } } }",
+      "reason": "no member of this impl block could be transpiled (1 sub-issue(s)): impl method `maybe_plain_http` body: mutating method's tail expression is neither a threaded-binding field/whole-value re-assignment nor (with the method's original return type already `()`/self-chain, and either multiple threaded bindings or one already assigned) an extra value — value-threading only supports a flat sequence of `self.<field> = ..`/`*<param> = ..` re-assignments plus, when the source return type is non-unit, one trailing value expression (DN-125 §5, conservative scope per §6.1)",
+      "item_name": "OrasTransport"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 895,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl OciTransport for OrasTransport { fn push (& self , reference : & str , config : & [u8] , layers : & [ObjectBlob] ,) -> Result < String , RemoteError > { oras_preflight () ? ; let tmp = unique_temp_dir (\"oras-push\") ? ; let _guard = TempDirGuard (tmp . clone ()) ; let cfg_name = \"config.densemap\" ; let cfg_path = tmp . join (cfg_name) ; std :: fs :: write (& cfg_path , config) . map_err (| e | io (& cfg_path . display () . to_string () , e)) ? ; for blob in layers { let p = tmp . join (blob . oci_title ()) ; std :: fs :: write (& p , & blob . bytes) . map_err (| e | io (& p . display () . to_string () , e)) ? ; } let mut cmd = Command :: new (\"oras\") ; cmd . current_dir (& tmp) ; cmd . arg (\"push\") ; self . maybe_plain_http (& mut cmd) ; cmd . arg (reference) ; cmd . arg (\"--artifact-type\") . arg (\"application/vnd.mycelium.spore.v1\") ; cmd . arg (\"--config\") . arg (format ! (\"{cfg_name}:application/vnd.mycelium.densemap.v1\")) ; for blob in layers { cmd . arg (format ! (\"{}:application/vnd.mycelium.spore.object.v1\" , blob . oci_title ())) ; } let out = spawn_oras (cmd) ? ; require_success (& out , \"oras push\") ? ; let text = format ! (\"{}\\n{}\" , String :: from_utf8_lossy (& out . stdout) , String :: from_utf8_lossy (& out . stderr)) ; extract_digest (& text) . ok_or_else (| | { RemoteError :: Transport (format ! (\"oras push succeeded but reported no `Digest:` line — cannot confirm the manifest \\\n                 digest (G2); output tail:\\n{}\" , tail_lines (& text , 30))) }) } fn pull (& self , reference : & str) -> Result < (Vec < u8 > , PulledLayers) , RemoteError > { oras_preflight () ? ; let mut cfg_cmd = Command :: new (\"oras\") ; cfg_cmd . arg (\"manifest\") . arg (\"fetch-config\") ; self . maybe_plain_http (& mut cfg_cmd) ; cfg_cmd . arg (reference) ; let cfg_out = spawn_oras (cfg_cmd) ? ; if ! cfg_out . status . success () { return Err (classify_oras_failure (& cfg_out , \"oras manifest fetch-config\" ,)) ; } let config = cfg_out . stdout ; let tmp = unique_temp_dir (\"oras-pull\") ? ; let _guard = TempDirGuard (tmp . clone ()) ; let mut pull_cmd = Command :: new (\"oras\") ; pull_cmd . arg (\"pull\") ; self . maybe_plain_http (& mut pull_cmd) ; pull_cmd . arg (reference) ; pull_cmd . arg (\"-o\") . arg (& tmp) ; let pull_out = spawn_oras (pull_cmd) ? ; require_success (& pull_out , \"oras pull\") ? ; let mut layers = Vec :: new () ; let rd = std :: fs :: read_dir (& tmp) . map_err (| e | io (& tmp . display () . to_string () , e)) ? ; for entry in rd { let entry = entry . map_err (| e | io (& tmp . display () . to_string () , e)) ? ; let path = entry . path () ; if path . is_file () { let name = path . file_name () . and_then (| n | n . to_str ()) . unwrap_or_default () . to_owned () ; let bytes = std :: fs :: read (& path) . map_err (| e | io (& path . display () . to_string () , e)) ? ; layers . push ((name , bytes)) ; } } Ok ((config , layers)) } fn list_tags (& self , repo : & str) -> Result < Vec < String > , RemoteError > { oras_preflight () ? ; let mut cmd = Command :: new (\"oras\") ; cmd . arg (\"repo\") . arg (\"tags\") ; self . maybe_plain_http (& mut cmd) ; cmd . arg (repo) ; let out = spawn_oras (cmd) ? ; if ! out . status . success () { return Err (classify_oras_failure (& out , \"oras repo tags\")) ; } let text = String :: from_utf8_lossy (& out . stdout) ; Ok (text . lines () . map (str :: trim) . filter (| l | ! l . is_empty ()) . map (str :: to_owned) . collect ()) } }",
+      "reason": "trait-impl of non-prelude trait `OciTransport` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "OrasTransport"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1015,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" An in-memory [`OciTransport`] test double — no `oras`/network involved, for pure integration\"] # [doc = \" tests of the dense-map + verify-and-reconstruct pipeline. Guarantee posture: this is a **test\"] # [doc = \" fixture**, not a claim about real OCI-registry behavior.\"] # [derive (Default)] pub struct MemTransport { store : RefCell < HashMap < String , (Vec < u8 > , PulledLayers) > > , }",
+      "reason": "struct `MemTransport` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "MemTransport"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1023,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl MemTransport { # [doc = \" A fresh, empty in-memory registry double.\"] # [must_use] pub fn new () -> Self { Self :: default () } }",
+      "reason": "no member of this impl block could be transpiled (1 sub-issue(s)): impl method `new` body: qualified/associated-function call `Self :: default` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "MemTransport"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1031,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl OciTransport for MemTransport { fn push (& self , reference : & str , config : & [u8] , layers : & [ObjectBlob] ,) -> Result < String , RemoteError > { let layer_pairs : PulledLayers = layers . iter () . map (| b | (b . oci_title () , b . bytes . clone ())) . collect () ; self . store . borrow_mut () . insert (reference . to_owned () , (config . to_vec () , layer_pairs)) ; Ok (format ! (\"sha256:{}\" , blake3 :: hash (config) . to_hex ())) } fn pull (& self , reference : & str) -> Result < (Vec < u8 > , PulledLayers) , RemoteError > { self . store . borrow () . get (reference) . cloned () . ok_or_else (| | { RemoteError :: NotFound (format ! (\"no artifact pushed for reference {reference:?} in this in-memory transport\")) }) } fn list_tags (& self , repo : & str) -> Result < Vec < String > , RemoteError > { let prefix = format ! (\"{repo}:\") ; Ok (self . store . borrow () . keys () . filter_map (| r | r . strip_prefix (prefix . as_str ()) . map (str :: to_owned)) . collect ()) } }",
+      "reason": "trait-impl of non-prelude trait `OciTransport` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "MemTransport"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1070,
+      "col": 1,
+      "category": "PayloadVariant",
+      "rust_construct": "PayloadVariant",
+      "snippet": "# [doc = \" Where a `spore` registry operation routes — decided **once, from an explicit scheme, never\"] # [doc = \" guessed** (ADR-037 §1/§5): a bare path is the M-732 local store; `ghcr://`/`oci://` select the\"] # [doc = \" remote OCI backend.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum RegistryTarget { # [doc = \" The M-732 local, file-based store.\"] Local (PathBuf) , # [doc = \" The remote OCI/GHCR backend: `base` is the OCI repository namespace the `name` is joined\"] # [doc = \" under (`<base>/<name>:<version>`); `plain_http` selects unencrypted HTTP (only ever set for\"] # [doc = \" a `localhost`/`127.*` `oci://` host — never for `ghcr://`).\"] Oci { base : String , plain_http : bool } , }",
+      "reason": "enum `RegistryTarget` has a named-field variant referencing a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "RegistryTarget"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1083,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Parse a `--registry` value into a [`RegistryTarget`] (ADR-037 §1/§5): `ghcr://<owner>/<repo>` →\"] # [doc = \" GHCR at `ghcr.io/<owner>/<repo>`; `oci://<host>[/<path>]` → that host (plain HTTP auto-selected\"] # [doc = \" for `localhost`/`127.*`, so a local dev registry needs no extra flag); any other `<scheme>://` is\"] # [doc = \" an explicit [`RemoteError::InvalidInput`] (an unrecognized scheme is never silently treated as a\"] # [doc = \" local path); no scheme at all is the local store. The route is decided by the scheme alone —\"] # [doc = \" never guessed from the target's reachability (G2).\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RemoteError::InvalidInput`] for an empty `ghcr://`/`oci://` authority, or an unrecognized\"] # [doc = \" `<scheme>://`.\"] pub fn parse_registry (s : & str) -> Result < RegistryTarget , RemoteError > { if let Some (rest) = s . strip_prefix (\"ghcr://\") { if rest . is_empty () { return Err (RemoteError :: InvalidInput (\"ghcr:// requires an owner/repo path, e.g. `ghcr://my-org/my-repo`\" . to_owned () ,)) ; } return Ok (RegistryTarget :: Oci { base : format ! (\"ghcr.io/{rest}\") , plain_http : false , }) ; } if let Some (rest) = s . strip_prefix (\"oci://\") { if rest . is_empty () { return Err (RemoteError :: InvalidInput (\"oci:// requires a host[/path], e.g. `oci://localhost:5000` or `oci://reg.example.com/ns`\" . to_owned () ,)) ; } let host = rest . split ('/') . next () . unwrap_or (\"\") ; let plain_http = host == \"localhost\" || host . starts_with (\"localhost:\") || host . starts_with (\"127.\") ; return Ok (RegistryTarget :: Oci { base : rest . to_owned () , plain_http , }) ; } if let Some ((scheme , _)) = s . split_once (\"://\") { return Err (RemoteError :: InvalidInput (format ! (\"unrecognized registry scheme `{scheme}://` — only `ghcr://` and `oci://` select the remote \\\n             backend; a bare path is the local store (the route is never guessed, ADR-037 §1/§5)\"))) ; } Ok (RegistryTarget :: Local (PathBuf :: from (s))) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "parse_registry"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1129,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Reject a `name`/`version` that would not survive as an OCI reference component: empty, or\"] # [doc = \" containing whitespace, `/`, or `:` (which would break `<repo>/<name>:<version>` parsing). This is\"] # [doc = \" a **minimal, honest** check — it does not attempt to enforce the full OCI reference grammar;\"] # [doc = \" anything past this is left for `oras`/the registry to report (never silently rewritten).\"] fn validate_oci_component (kind : & str , value : & str) -> Result < () , RemoteError > { let bad = value . is_empty () || value . chars () . any (char :: is_whitespace) || value . contains ('/') || value . contains (':') ; if bad { return Err (RemoteError :: InvalidInput (format ! (\"{kind} {value:?} is not a safe OCI reference component — it must be non-empty and contain \\\n             no whitespace, `/`, or `:` (never guessed or silently rewritten; G2)\"))) ; } Ok (()) }",
+      "reason": "method call `.is_empty(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__is_empty` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `is_empty(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "validate_oci_component"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1147,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The receipt of a successful [`publish_remote`] — the never-silent EXPLAIN of what was pushed and\"] # [doc = \" where (G2; no black box).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct RemotePublishReceipt { # [doc = \" The published package name.\"] pub name : String , # [doc = \" The published version label.\"] pub version : String , # [doc = \" The spore identity (ADR-003).\"] pub spore_id : ContentHash , # [doc = \" The OCI manifest digest the transport reported.\"] pub manifest_digest : String , # [doc = \" The full OCI reference (`<repo>:<tag>`) pushed to.\"] pub reference : String , }",
+      "reason": "struct `RemotePublishReceipt` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "RemotePublishReceipt"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1163,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" **Publish** `spore` to the remote OCI backend `target` (must be [`RegistryTarget::Oci`]):\"] # [doc = \" build the dense-map + objects from `project_dir` ([`build_dense_map`]), then push them via\"] # [doc = \" `transport` to `<target.base>/<name>:<version>` (ADR-037 §2).\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RemoteError::InvalidInput`] if `target` is [`RegistryTarget::Local`] or `name`/`version` is not\"] # [doc = \" a safe reference component; propagates [`build_dense_map`]'s [`RemoteError::Io`] /\"] # [doc = \" [`RemoteError::Integrity`], and the `transport`'s own errors (e.g. [`RemoteError::ToolMissing`]).\"] pub fn publish_remote (target : & RegistryTarget , spore : & Spore , project_dir : & Path , name : & str , version : & str , transport : & dyn OciTransport ,) -> Result < RemotePublishReceipt , RemoteError > { let RegistryTarget :: Oci { base , .. } = target else { return Err (RemoteError :: InvalidInput (\"publish_remote requires an `Oci` registry target — a `Local` target uses \\\n             `registry::publish` instead (the route is decided once, by scheme; ADR-037 §5)\" . to_owned () ,)) ; } ; validate_oci_component (\"name\" , name) ? ; validate_oci_component (\"version\" , version) ? ; let (dense_map , blobs) = build_dense_map (spore , project_dir) ? ; let config = encode_dense_map (& dense_map) ; let repo = format ! (\"{base}/{name}\") ; let reference = format ! (\"{repo}:{version}\") ; match transport . list_tags (& repo) { Ok (tags) if tags . iter () . any (| t | t == version) => { let (existing_config , _existing_layers) = transport . pull (& reference) ? ; let existing = decode_dense_map (& existing_config) ? ; if existing . spore_id != spore . id { return Err (RemoteError :: Conflict (format ! (\"{name}@{version} is already published at {reference} with a DIFFERENT spore \\\n                     (existing spore_id={}, publishing {}) — a registry name@version is immutable; \\\n                     publish under a new version (ADR-003 / M-732 parity, G2). Note: OCI tags are \\\n                     server-side mutable, so this is a best-effort client-side guard (Declared), not \\\n                     a proven server invariant.\" , existing . spore_id . as_str () , spore . id . as_str () ,))) ; } } Ok (_) => { } Err (RemoteError :: NotFound (_)) => { } Err (e) => return Err (e) , } let manifest_digest = transport . push (& reference , & config , & blobs) ? ; Ok (RemotePublishReceipt { name : name . to_owned () , version : version . to_owned () , spore_id : spore . id . clone () , manifest_digest , reference , }) }",
+      "reason": "unsupported Rust type form `dyn OciTransport`",
+      "item_name": "publish_remote"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1237,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The result of a successful [`resolve_remote`]: the concrete version selected and the\"] # [doc = \" fetch-and-verified reconstruction.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct RemoteResolved { # [doc = \" The resolved name.\"] pub name : String , # [doc = \" The concrete version selected (after resolving `latest`/`*`).\"] pub version : String , # [doc = \" The verified, reconstructed spore.\"] pub reconstructed : Reconstructed , }",
+      "reason": "struct `RemoteResolved` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "RemoteResolved"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "line": 1249,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" **Resolve** `name` at `constraint` against the remote OCI backend `target` (must be\"] # [doc = \" [`RegistryTarget::Oci`]): `constraint` is an exact version, or `latest`/`*` (the highest tag by\"] # [doc = \" [`crate::registry`]'s version-sort key, reused here — DRY). A range constraint (`^`/`~`/`>`/`<`/\"] # [doc = \" `=`/a comma-separated list) is an explicit [`RemoteError::Unsupported`] — v0 never mis-resolves a\"] # [doc = \" SemVer range it cannot honestly evaluate (the deferred ADR-018 work). Pulls via `transport`, then\"] # [doc = \" [`decode_dense_map`]s the config and [`verify_and_reconstruct`]s against the fetched layers.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RemoteError::InvalidInput`] if `target` is [`RegistryTarget::Local`] or the constraint is\"] # [doc = \" empty; [`RemoteError::Unsupported`] for a range constraint; [`RemoteError::NotFound`] if no tag\"] # [doc = \" matches; propagates `transport`'s errors and [`decode_dense_map`]/[`verify_and_reconstruct`]'s\"] # [doc = \" integrity errors.\"] pub fn resolve_remote (target : & RegistryTarget , name : & str , constraint : & str , transport : & dyn OciTransport ,) -> Result < RemoteResolved , RemoteError > { let RegistryTarget :: Oci { base , .. } = target else { return Err (RemoteError :: InvalidInput (\"resolve_remote requires an `Oci` registry target — a `Local` target uses \\\n             `registry::resolve` instead (the route is decided once, by scheme; ADR-037 §5)\" . to_owned () ,)) ; } ; validate_oci_component (\"name\" , name) ? ; let c = constraint . trim () ; if c . is_empty () { return Err (RemoteError :: InvalidInput (format ! (\"{name}: an empty version constraint resolves nothing (it is never guessed)\"))) ; } if c . starts_with (['^' , '~' , '>' , '<' , '=']) || c . contains (',') { return Err (RemoteError :: Unsupported (format ! (\"version constraint {c:?} is a range — the remote backend resolves an exact version or \\\n             `latest`/`*` only; SemVer range resolution is the deferred ADR-018 work, not silently \\\n             approximated (VR-5)\"))) ; } let repo = format ! (\"{base}/{name}\") ; let version = if c == \"latest\" || c == \"*\" { let mut tags = transport . list_tags (& repo) ? ; tags . sort_by_key (| v | crate :: registry :: version_key (v)) ; tags . pop () . ok_or_else (| | RemoteError :: NotFound (format ! (\"{name}: no tags found at {repo}\"))) ? } else { c . to_owned () } ; let reference = format ! (\"{repo}:{version}\") ; let (config , layers) = transport . pull (& reference) ? ; let dense_map = decode_dense_map (& config) ? ; let reconstructed = verify_and_reconstruct (dense_map , & layers) ? ; Ok (RemoteResolved { name : name . to_owned () , version , reconstructed , }) }",
+      "reason": "unsupported Rust type form `dyn OciTransport`",
+      "item_name": "resolve_remote"
+    }
+  ],
+  "total_top_level_items": 55
+}

@@ -1,0 +1,87 @@
+{
+  "records": [
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-spore-myc/experiments/vet/bin/spore.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "class": "Clean",
+      "exit_code": 0,
+      "diagnostic": "",
+      "non_test_items": 21,
+      "emitted_items": 0
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-spore-myc/experiments/vet/lib.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "class": "CheckError",
+      "exit_code": 3,
+      "diagnostic": "check-error: check error in `exit_code`: a bare integer literal has no representation family (no cross-family defaulting, Q6) — write a binary/ternary literal, declare a `default paradigm` (RFC-0012), or ascribe a Dense element",
+      "non_test_items": 20,
+      "emitted_items": 6
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-spore-myc/experiments/vet/registry.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "class": "CheckError",
+      "exit_code": 3,
+      "diagnostic": "check-error: check error in `exit_code`: a bare integer literal has no representation family (no cross-family defaulting, Q6) — write a binary/ternary literal, declare a `default paradigm` (RFC-0012), or ascribe a Dense element",
+      "non_test_items": 21,
+      "emitted_items": 2
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-spore-myc/experiments/vet/remote.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/remote.rs",
+      "class": "CheckError",
+      "exit_code": 3,
+      "diagnostic": "check-error: check error in `TempDirGuard`: unknown type `PathBuf`",
+      "non_test_items": 55,
+      "emitted_items": 7
+    }
+  ],
+  "total_non_test_items": 117,
+  "total_emitted_items": 15,
+  "total_checked_clean_items": 0,
+  "class_counts": {
+    "CheckError": 3,
+    "Clean": 1
+  },
+  "phylum": {
+    "ran": true,
+    "ok": false,
+    "nodules": [
+      {
+        "nodule": "spore_kw.bin_kw.spore_kw",
+        "file": "bin/spore.myc",
+        "class": "Clean",
+        "site": null,
+        "on": null,
+        "message": null
+      },
+      {
+        "nodule": "spore_kw",
+        "file": "lib.myc",
+        "class": "CheckError",
+        "site": "exit_code",
+        "on": null,
+        "message": "a bare integer literal has no representation family (no cross-family defaulting, Q6) — write a binary/ternary literal, declare a `default paradigm` (RFC-0012), or ascribe a Dense element"
+      },
+      {
+        "nodule": "spore_kw.registry",
+        "file": "registry.myc",
+        "class": "CheckError",
+        "site": "exit_code",
+        "on": null,
+        "message": "a bare integer literal has no representation family (no cross-family defaulting, Q6) — write a binary/ternary literal, declare a `default paradigm` (RFC-0012), or ascribe a Dense element"
+      },
+      {
+        "nodule": "spore_kw.remote",
+        "file": "remote.myc",
+        "class": "CheckError",
+        "site": "TempDirGuard",
+        "on": null,
+        "message": "unknown type `PathBuf`"
+      }
+    ],
+    "diagnostic": "unknown type `PathBuf`"
+  },
+  "total_checked_clean_items_phylum": 0
+}

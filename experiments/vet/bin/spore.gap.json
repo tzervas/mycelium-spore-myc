@@ -1,0 +1,227 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+  "emitted_items": [],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 1,
+      "col": 1,
+      "category": "ReservedWord",
+      "rust_construct": "ReservedWord",
+      "snippet": "nodule spore.bin.spore;",
+      "reason": "derived nodule path `spore.bin.spore` has segment(s) [spore, bin, spore] colliding with a Mycelium reserved word — emitting them verbatim would fail to parse (`nodule spore.bin.spore;` tokenizes the colliding word as a keyword, not an identifier); each colliding segment is escaped with the `_kw` suffix (now `spore_kw.bin_kw.spore_kw`) rather than dropped, so distinct source files whose only differing segment is a reserved word (e.g. `l1.fuse` vs `l1.nodule`) stay distinguishable instead of both collapsing onto the same nodule path (G2/VR-5)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 26,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: path :: { Path , PathBuf } ;",
+      "reason": "`use std.path::Path` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.path::PathBuf` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 27,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: process :: ExitCode ;",
+      "reason": "`use std.process::ExitCode` — `std.process` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_proj :: parse_manifest ;",
+      "reason": "`use mycelium_proj::parse_manifest` — `mycelium_proj` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 30,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_spore :: remote :: { self , RegistryTarget } ;",
+      "reason": "`use mycelium_spore.remote::{self, ..}` — `self` binds the module ITSELF as a local name; there is no \"import a nodule as a name\" construct in this grammar, so this leaf cannot resolve (distinct from an ordinary lookup miss); `use mycelium_spore.remote::RegistryTarget` — `RegistryTarget` is not among sibling `mycelium_spore.remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 31,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_spore :: { build_spore , explain , registry , Spore } ;",
+      "reason": "`use mycelium_spore::build_spore` — `build_spore` is not among sibling `mycelium_spore`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use mycelium_spore::explain` — `explain` is not among sibling `mycelium_spore`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use mycelium_spore::registry` — `registry` is not among sibling `mycelium_spore`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use mycelium_spore::Spore` — `Spore` is not among sibling `mycelium_spore`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 33,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "fn usage () -> ExitCode { eprintln ! (\"usage:\\n  \\\n         spore build   [--config <manifest>] [-o <out>]\\n  \\\n         spore explain [--config <manifest>]\\n  \\\n         spore publish --registry <dir|oci://…|ghcr://…> [--config <manifest>] [--name <n>] [--version <v>]\\n  \\\n         spore resolve <name> <version|latest> --registry <dir|oci://…|ghcr://…> [-o <out>]\") ; ExitCode :: from (64) }",
+      "reason": "function body contains a macro-invocation statement (e.g. `debug_assert!`/`println!`) — no macro system in this grammar fragment",
+      "item_name": "usage"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 44,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The flags shared across subcommands, parsed once.\"] # [derive (Default)] struct Opts { config : Option < String > , out : Option < String > , registry : Option < String > , name : Option < String > , version : Option < String > , positionals : Vec < String > , }",
+      "reason": "struct `Opts` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "Opts"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 55,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn parse_opts (mut args : std :: env :: Args) -> Option < Opts > { let mut o = Opts :: default () ; while let Some (a) = args . next () { match a . as_str () { \"--config\" => o . config = Some (args . next () ?) , \"-o\" => o . out = Some (args . next () ?) , \"--registry\" => o . registry = Some (args . next () ?) , \"--name\" => o . name = Some (args . next () ?) , \"--version\" => o . version = Some (args . next () ?) , s if s . starts_with ('-') => return None , _ => o . positionals . push (a) , } } Some (o) }",
+      "reason": "qualified type path `std :: env :: Args` — collapsing to its last segment would risk colliding with an unrelated same-named local type (e.g. `std::cmp::Ordering` vs a local `Ordering`); left an explicit gap rather than guessed (VR-5)",
+      "item_name": "parse_opts"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 71,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn main () -> ExitCode { let mut args = std :: env :: args () ; let _argv0 = args . next () ; let Some (cmd) = args . next () else { return usage () ; } ; let Some (opts) = parse_opts (args) else { return usage () ; } ; match cmd . as_str () { \"build\" | \"explain\" | \"publish\" | \"resolve\" => { if let Err (code) = validate_opts (& cmd , & opts) { return code ; } if cmd == \"resolve\" { run_resolve (& opts) } else { run_with_spore (& cmd , & opts) } } _ => usage () , } }",
+      "reason": "qualified/associated-function call `std :: env :: args` — no established Mycelium surface form for a Rust conversion-op body; emitting the bare last-segment name would fabricate a call (e.g. `from(...)` is not a Mycelium builtin)",
+      "item_name": "main"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 98,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Reject inputs a subcommand does not use — never silently ignored (G2). Each subcommand declares\"] # [doc = \" exactly the flags it accepts and whether it takes positional arguments; anything else (an\"] # [doc = \" irrelevant flag like `spore explain -o out`, or a stray positional like `spore build garbage`) is\"] # [doc = \" a usage error rather than a silent no-op.\"] fn validate_opts (cmd : & str , opts : & Opts) -> Result < () , ExitCode > { let (allowed , takes_positionals) : (& [& str] , bool) = match cmd { \"explain\" => (& [\"--config\"] , false) , \"build\" => (& [\"--config\" , \"-o\"] , false) , \"publish\" => (& [\"--config\" , \"--registry\" , \"--name\" , \"--version\"] , false) , \"resolve\" => (& [\"--registry\" , \"-o\"] , true) , _ => (& [] , false) , } ; let present = [(\"--config\" , opts . config . is_some ()) , (\"-o\" , opts . out . is_some ()) , (\"--registry\" , opts . registry . is_some ()) , (\"--name\" , opts . name . is_some ()) , (\"--version\" , opts . version . is_some ()) ,] ; let bad : Vec < & str > = present . iter () . filter (| (flag , set) | * set && ! allowed . contains (flag)) . map (| (flag , _) | * flag) . collect () ; if ! bad . is_empty () { eprintln ! (\"spore: `{cmd}` does not accept {} — irrelevant flag(s) are never silently ignored (G2)\" , bad . join (\", \")) ; return Err (usage ()) ; } if ! takes_positionals && ! opts . positionals . is_empty () { eprintln ! (\"spore: `{cmd}` takes no positional arguments, got: {}\" , opts . positionals . join (\" \")) ; return Err (usage ()) ; } Ok (()) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "validate_opts"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 139,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The subcommands that first build a spore from a manifest (`build`/`explain`/`publish`). Argument\"] # [doc = \" relevance is validated up-front by [`validate_opts`] (irrelevant flags / stray positionals are\"] # [doc = \" already rejected before this runs).\"] fn run_with_spore (cmd : & str , opts : & Opts) -> ExitCode { let manifest_path = opts . config . as_deref () . map (PathBuf :: from) . unwrap_or_else (| | PathBuf :: from (\"mycelium-proj.toml\")) ; let project_dir = manifest_path . parent () . filter (| p | ! p . as_os_str () . is_empty ()) . map (Path :: to_path_buf) . unwrap_or_else (| | PathBuf :: from (\".\")) ; let text = match std :: fs :: read_to_string (& manifest_path) { Ok (t) => t , Err (e) => { eprintln ! (\"spore: io-error: {}: {e}\" , manifest_path . display ()) ; return ExitCode :: from (66) ; } } ; let manifest = match parse_manifest (& text) { Ok (m) => m , Err (e) => { eprintln ! (\"spore: manifest-error: {}: {e}\" , manifest_path . display ()) ; return ExitCode :: from (2) ; } } ; let spore = match build_spore (& manifest , & project_dir) { Ok (s) => s , Err (e) => { eprintln ! (\"spore: {e}\") ; return ExitCode :: from (e . exit_code ()) ; } } ; match cmd { \"explain\" => { print ! (\"{}\" , explain (& spore)) ; ExitCode :: SUCCESS } \"build\" => emit_build (& spore , opts . out . as_deref ()) , \"publish\" => run_publish (& spore , & project_dir , opts) , _ => usage () , } }",
+      "reason": "method call `.unwrap_or_else(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__unwrap_or_else` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `unwrap_or_else(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "run_with_spore"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 187,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `spore publish` — publish the built spore under `name@version`. The `--registry` value's scheme\"] # [doc = \" decides the backend, once, never guessed (ADR-037 §1/§5): a bare path is the M-732 local store;\"] # [doc = \" `ghcr://`/`oci://` route to the remote OCI/GHCR backend (ADR-037).\"] fn run_publish (spore : & Spore , project_dir : & Path , opts : & Opts) -> ExitCode { let Some (registry_str) = opts . registry . as_deref () else { eprintln ! (\"spore: usage: publish requires --registry <dir|oci://…|ghcr://…>\") ; return ExitCode :: from (64) ; } ; let target = match remote :: parse_registry (registry_str) { Ok (t) => t , Err (e) => { eprintln ! (\"spore: {e}\") ; return ExitCode :: from (e . exit_code ()) ; } } ; match & target { RegistryTarget :: Local (dir) => run_publish_local (spore , dir , opts) , RegistryTarget :: Oci { .. } => run_publish_remote (spore , project_dir , & target , opts) , } }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "run_publish"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 208,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The `name`/`version` a publish runs under: `--name`/`--version` win, else the manifest's; the\"] # [doc = \" version is never guessed (ADR-003) — a missing version is an explicit publish-input error.\"] fn publish_name_version (spore : & Spore , opts : & Opts) -> Result < (String , String) , ExitCode > { let name = opts . name . clone () . unwrap_or_else (| | spore . name . clone ()) ; let Some (version) = opts . version . clone () . or_else (| | spore . version . clone ()) else { eprintln ! (\"spore: publish-input-error: no version to publish under — pass --version or set \\\n             [project].version (it is never guessed; ADR-003)\") ; return Err (ExitCode :: from (3)) ; } ; Ok ((name , version)) }",
+      "reason": "method call `.unwrap_or_else(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__unwrap_or_else` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `unwrap_or_else(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "publish_name_version"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 222,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `spore publish --registry <dir>` — the M-732 local, file-based store.\"] fn run_publish_local (spore : & Spore , registry_dir : & Path , opts : & Opts) -> ExitCode { let (name , version) = match publish_name_version (spore , opts) { Ok (nv) => nv , Err (code) => return code , } ; let descriptor = explain (spore) . into_bytes () ; match registry :: publish (registry_dir , spore , & descriptor , & name , & version) { Ok (r) => { let state = if r . already_present { \"already present\" } else { \"published\" } ; eprintln ! (\"spore: {state} {name}@{version}\\n  spore_id: {}\\n  artifact: {}\\n  object:   {}\" , r . spore_id . as_str () , r . artifact . as_str () , r . object_path . display ()) ; ExitCode :: SUCCESS } Err (e) => { eprintln ! (\"spore: {e}\") ; ExitCode :: from (e . exit_code ()) } } }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "run_publish_local"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 251,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `spore publish --registry oci://…|ghcr://…` — the ADR-037 remote OCI/GHCR backend, driven by\"] # [doc = \" `oras` ([`remote::OrasTransport`]). `oras` absent or failing is an explicit, actionable error\"] # [doc = \" (never a silent skip — ADR-037 §5).\"] fn run_publish_remote (spore : & Spore , project_dir : & Path , target : & RegistryTarget , opts : & Opts ,) -> ExitCode { let (name , version) = match publish_name_version (spore , opts) { Ok (nv) => nv , Err (code) => return code , } ; let plain_http = matches ! (target , RegistryTarget :: Oci { plain_http : true , .. }) ; let transport = remote :: OrasTransport { plain_http } ; match remote :: publish_remote (target , spore , project_dir , & name , & version , & transport) { Ok (r) => { eprintln ! (\"spore: published {name}@{version}\\n  reference:        {}\\n  manifest digest:  {}\\n  spore_id:         {}\" , r . reference , r . manifest_digest , r . spore_id . as_str ()) ; ExitCode :: SUCCESS } Err (e) => { eprintln ! (\"spore: {e}\") ; ExitCode :: from (e . exit_code ()) } } }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "run_publish_remote"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 289,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `spore resolve <name> <version|latest>` — fetch a hash-verified artifact. The `--registry`\"] # [doc = \" scheme routes to the local store or the remote OCI/GHCR backend, same as `publish` (ADR-037).\"] fn run_resolve (opts : & Opts) -> ExitCode { let Some (registry_str) = opts . registry . as_deref () else { eprintln ! (\"spore: usage: resolve requires --registry <dir|oci://…|ghcr://…>\") ; return ExitCode :: from (64) ; } ; let [name , constraint] = match opts . positionals . as_slice () { [n , c] => [n . clone () , c . clone ()] , _ => { eprintln ! (\"spore: usage: resolve <name> <version|latest> --registry <dir|oci://…|ghcr://…> [-o <out>]\") ; return ExitCode :: from (64) ; } } ; let target = match remote :: parse_registry (registry_str) { Ok (t) => t , Err (e) => { eprintln ! (\"spore: {e}\") ; return ExitCode :: from (e . exit_code ()) ; } } ; match & target { RegistryTarget :: Local (dir) => run_resolve_local (dir , & name , & constraint , opts) , RegistryTarget :: Oci { .. } => run_resolve_remote (& target , & name , & constraint , opts) , } }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "run_resolve"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 318,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `spore resolve --registry <dir>` — the M-732 local, file-based store.\"] fn run_resolve_local (registry_dir : & Path , name : & str , constraint : & str , opts : & Opts) -> ExitCode { match registry :: resolve (registry_dir , name , constraint) { Ok (r) => { eprintln ! (\"spore: resolved {name}@{} (spore_id {}, artifact {})\" , r . version , r . spore_id . as_str () , r . artifact . as_str ()) ; match opts . out . as_deref () { Some (path) => match std :: fs :: write (path , & r . bytes) { Ok (()) => { eprintln ! (\"spore: wrote {path}\") ; ExitCode :: SUCCESS } Err (e) => { eprintln ! (\"spore: io-error: {path}: {e}\") ; ExitCode :: from (66) } } , None => { print ! (\"{}\" , String :: from_utf8_lossy (& r . bytes)) ; ExitCode :: SUCCESS } } } Err (e) => { eprintln ! (\"spore: {e}\") ; ExitCode :: from (e . exit_code ()) } } }",
+      "reason": "qualified/associated-function call `registry :: resolve` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "run_resolve_local"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 353,
+      "col": 1,
+      "category": "MacroInvocation",
+      "rust_construct": "MacroInvocation",
+      "snippet": "# [doc = \" `spore resolve --registry oci://…|ghcr://…` — the ADR-037 remote OCI/GHCR backend. With `-o\"] # [doc = \" <dir>`, materializes the fetch-and-verified source tree under `<dir>` (plus a\"] # [doc = \" `<dir>/mycelium-densemap` receipt); without `-o`, prints the verified receipt to stderr only —\"] # [doc = \" never writes a partial tree (G2).\"] fn run_resolve_remote (target : & RegistryTarget , name : & str , constraint : & str , opts : & Opts ,) -> ExitCode { let plain_http = matches ! (target , RegistryTarget :: Oci { plain_http : true , .. }) ; let transport = remote :: OrasTransport { plain_http } ; match remote :: resolve_remote (target , name , constraint , & transport) { Ok (r) => { let obj_count = r . reconstructed . sources . len () ; match opts . out . as_deref () { Some (dir) => match materialize (& r . reconstructed , Path :: new (dir)) { Ok (()) => { eprintln ! (\"spore: resolved {name}@{} (spore_id {}, {obj_count} object(s)) -> {dir}\" , r . version , r . reconstructed . spore_id . as_str ()) ; ExitCode :: SUCCESS } Err (e) => { eprintln ! (\"spore: {e}\") ; ExitCode :: from (e . exit_code ()) } } , None => { eprintln ! (\"spore: resolved {name}@{} (spore_id {}, {obj_count} object(s)) — pass -o <dir> to materialize\" , r . version , r . reconstructed . spore_id . as_str ()) ; ExitCode :: SUCCESS } } } Err (e) => { eprintln ! (\"spore: {e}\") ; ExitCode :: from (e . exit_code ()) } } }",
+      "reason": "expression-position macro `matches` — no macro system in this grammar fragment (`write!`/`format!` lower to pure `Bytes` per DN-127/M-1090 WU-3)",
+      "item_name": "run_resolve_remote"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 406,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Write a [`remote::Reconstructed`] source tree under `out_dir` (creating parent directories) plus\"] # [doc = \" its dense-map receipt at `<out_dir>/mycelium-densemap`. Every `rel_path` is validated by\"] # [doc = \" [`safe_join`] before any write — a resolved object naming an absolute path or a `..` component\"] # [doc = \" never escapes `out_dir` (G2, the same traversal spirit as `registry::safe_component`).\"] fn materialize (r : & mycelium_spore :: remote :: Reconstructed , out_dir : & Path ,) -> Result < () , mycelium_spore :: remote :: RemoteError > { use mycelium_spore :: remote :: RemoteError ; std :: fs :: create_dir_all (out_dir) . map_err (| e | RemoteError :: Io (format ! (\"{}: {e}\" , out_dir . display ()))) ? ; for (rel_path , bytes) in & r . sources { let target = safe_join (out_dir , rel_path) ? ; if let Some (parent) = target . parent () { std :: fs :: create_dir_all (parent) . map_err (| e | RemoteError :: Io (format ! (\"{}: {e}\" , parent . display ()))) ? ; } std :: fs :: write (& target , bytes) . map_err (| e | RemoteError :: Io (format ! (\"{}: {e}\" , target . display ()))) ? ; } let dm_bytes = mycelium_spore :: remote :: encode_dense_map (& r . dense_map) ; let dm_path = out_dir . join (\"mycelium-densemap\") ; std :: fs :: write (& dm_path , dm_bytes) . map_err (| e | RemoteError :: Io (format ! (\"{}: {e}\" , dm_path . display ()))) ? ; Ok (()) }",
+      "reason": "qualified type path `mycelium_spore :: remote :: Reconstructed` — collapsing to its last segment would risk colliding with an unrelated same-named local type (e.g. `std::cmp::Ordering` vs a local `Ordering`); left an explicit gap rather than guessed (VR-5)",
+      "item_name": "materialize"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 433,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Join `root` with the forward-slashed relative path `rel`, refusing any component that would\"] # [doc = \" escape `root` (absolute path, `.`/`..`, an embedded NUL, or an empty component) — never silently\"] # [doc = \" joined (G2), same traversal-refusal spirit as `registry::safe_component`.\"] fn safe_join (root : & Path , rel : & str) -> Result < PathBuf , mycelium_spore :: remote :: RemoteError > { use mycelium_spore :: remote :: RemoteError ; if rel . is_empty () || rel . starts_with ('/') || rel . contains ('\\0') { return Err (RemoteError :: Integrity (format ! (\"resolved object path {rel:?} is not a safe relative path — refusing to write outside {} (G2)\" , root . display ()))) ; } let mut out = root . to_path_buf () ; for comp in rel . split ('/') { if comp . is_empty () || comp == \".\" || comp == \"..\" { return Err (RemoteError :: Integrity (format ! (\"resolved object path {rel:?} contains an unsafe component ({comp:?}) — refusing to \\\n                 write outside {} (G2)\" , root . display ()))) ; } out . push (comp) ; } Ok (out) }",
+      "reason": "qualified type path `mycelium_spore :: remote :: RemoteError` — collapsing to its last segment would risk colliding with an unrelated same-named local type (e.g. `std::cmp::Ordering` vs a local `Ordering`); left an explicit gap rather than guessed (VR-5)",
+      "item_name": "safe_join"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/bin/spore.rs",
+      "line": 458,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Emit the spore descriptor (the named-provisional v0 encoding; M-368 §9.1) — the EXPLAIN body prefixed\"] # [doc = \" with the identity line, written to `-o <out>` or stdout. (The R2 wire-schema supersedes this.)\"] fn emit_build (spore : & Spore , out : Option < & str >) -> ExitCode { let descriptor = explain (spore) ; match out { Some (path) => match std :: fs :: write (path , & descriptor) { Ok (()) => { eprintln ! (\"spore: wrote {} ({})\" , path , spore . id . as_str ()) ; ExitCode :: SUCCESS } Err (e) => { eprintln ! (\"spore: io-error: {path}: {e}\") ; ExitCode :: from (66) } } , None => { print ! (\"{descriptor}\") ; ExitCode :: SUCCESS } } }",
+      "reason": "qualified/associated-function call `std :: fs :: write` — no established Mycelium surface form for a Rust conversion-op body; emitting the bare last-segment name would fabricate a call (e.g. `from(...)` is not a Mycelium builtin)",
+      "item_name": "emit_build"
+    }
+  ],
+  "total_top_level_items": 21
+}

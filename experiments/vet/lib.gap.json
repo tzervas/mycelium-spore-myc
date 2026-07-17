@@ -1,0 +1,384 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+  "emitted_items": [
+    "co-include:RegistryError",
+    "co-include:OrasTransport,RemoteError",
+    "SporeError",
+    "impl SporeError",
+    "kind_str",
+    "MAX_WALK_DEPTH"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 1,
+      "col": 1,
+      "category": "ReservedWord",
+      "rust_construct": "ReservedWord",
+      "snippet": "nodule spore;",
+      "reason": "derived nodule path `spore` has segment(s) [spore] colliding with a Mycelium reserved word — emitting them verbatim would fail to parse (`nodule spore;` tokenizes the colliding word as a keyword, not an identifier); each colliding segment is escaped with the `_kw` suffix (now `spore_kw`) rather than dropped, so distinct source files whose only differing segment is a reserved word (e.g. `l1.fuse` vs `l1.nodule`) stay distinguishable instead of both collapsing onto the same nodule path (G2/VR-5)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 17,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: path :: { Path , PathBuf } ;",
+      "reason": "`use std.path::Path` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.path::PathBuf` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 19,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_core :: ContentHash ;",
+      "reason": "`use mycelium_core::ContentHash` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 20,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_proj :: { Manifest , ProjectKind } ;",
+      "reason": "`use mycelium_proj::Manifest` — `mycelium_proj` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_proj::ProjectKind` — `mycelium_proj` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 22,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "# [doc = \" The content-addressed registry (M-732): `publish` / `resolve` over a local store (ADR-003).\"] pub mod registry ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "registry"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use registry :: { artifact_hash , publish , resolve , PublishReceipt , RegistryError , Resolved } ;",
+      "reason": "`use registry::artifact_hash` — `artifact_hash` is not among sibling `registry`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use registry :: { artifact_hash , publish , resolve , PublishReceipt , RegistryError , Resolved } ;",
+      "reason": "`use registry::publish` — `publish` is not among sibling `registry`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use registry :: { artifact_hash , publish , resolve , PublishReceipt , RegistryError , Resolved } ;",
+      "reason": "`use registry::resolve` — `resolve` is not among sibling `registry`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use registry :: { artifact_hash , publish , resolve , PublishReceipt , RegistryError , Resolved } ;",
+      "reason": "`use registry::PublishReceipt` — `PublishReceipt` is not among sibling `registry`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use registry :: { artifact_hash , publish , resolve , PublishReceipt , RegistryError , Resolved } ;",
+      "reason": "`use registry::Resolved` — `Resolved` is not among sibling `registry`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 26,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "# [doc = \" The remote OCI/GHCR registry backend (M-871/E26-1; ADR-037): `publish_remote` / `resolve_remote`\"] # [doc = \" distributing the DN-28 dense-map over OCI, behind an [`remote::OciTransport`] (`oras` v0).\"] pub mod remote ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "remote"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::publish_remote` — `publish_remote` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::resolve_remote` — `resolve_remote` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::DenseMap` — `DenseMap` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::ObjectBlob` — `ObjectBlob` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::ObjectRef` — `ObjectRef` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::OciTransport` — `OciTransport` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::Reconstructed` — `Reconstructed` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::RegistryTarget` — `RegistryTarget` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::RemotePublishReceipt` — `RemotePublishReceipt` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 29,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use remote :: { publish_remote , resolve_remote , DenseMap , ObjectBlob , ObjectRef , OciTransport , OrasTransport , Reconstructed , RegistryTarget , RemoteError , RemotePublishReceipt , RemoteResolved , } ;",
+      "reason": "`use remote::RemoteResolved` — `RemoteResolved` is not among sibling `remote`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:OrasTransport,RemoteError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 34,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" A project source file, content-addressed (raw-byte BLAKE3; ADR-003).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct SourceFile { # [doc = \" Path relative to the project root (forward-slashed, deterministic).\"] pub path : String , # [doc = \" `blake3:<hex>` of the file bytes.\"] pub hash : ContentHash , }",
+      "reason": "struct `SourceFile` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "SourceFile"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 43,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" A resolved dependency edge — pinned by content hash (authoritative, ADR-003).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct ResolvedDep { # [doc = \" The dependency's local name.\"] pub name : String , # [doc = \" The depended-on phylum.\"] pub phylum : String , # [doc = \" The content-address pin (`blake3:…`).\"] pub hash : String , # [doc = \" The human version requirement (metadata; not identity).\"] pub version : Option < String > , }",
+      "reason": "struct `ResolvedDep` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "ResolvedDep"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 56,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" A built spore: its content-addressed identity plus the components that define it and the metadata that\"] # [doc = \" travels with (but does not define) it.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct Spore { # [doc = \" The spore identity — `blake3` over the canonical DAG (code + deps + surface), **excluding**\"] # [doc = \" metadata (ADR-003).\"] pub id : ContentHash , # [doc = \" The project shape.\"] pub kind : ProjectKind , # [doc = \" The germination surface (sorted public export names).\"] pub surface : Vec < String > , # [doc = \" The content-addressed source files (sorted by path).\"] pub sources : Vec < SourceFile > , # [doc = \" The resolved dependency edges (sorted by name).\"] pub deps : Vec < ResolvedDep > , # [doc = \" The project name (metadata — carried, not identity).\"] pub name : String , # [doc = \" The project version, if any (metadata — carried, not identity).\"] pub version : Option < String > , }",
+      "reason": "struct `Spore` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "Spore"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 77,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A spore-build refusal — never a partial artifact (G2).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum SporeError { # [doc = \" A missing/ambiguous publish input (no surface, no sources, a hashless dep, a bad include) (exit 3).\"] Publish (String) , # [doc = \" An I/O error reading the project (exit 66).\"] Io (String) , }",
+      "reason": "enum `SporeError` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "SporeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 77,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A spore-build refusal — never a partial artifact (G2).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum SporeError { # [doc = \" A missing/ambiguous publish input (no surface, no sources, a hashless dep, a bad include) (exit 3).\"] Publish (String) , # [doc = \" An I/O error reading the project (exit 66).\"] Io (String) , }",
+      "reason": "enum `SporeError` derive(Eq): covered by co-occurring PartialEq → `fn eq_SporeError` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "SporeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 86,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "impl SporeError { # [doc = \" The CLI exit code for this refusal.\"] # [must_use] pub fn exit_code (& self) -> u8 { match self { SporeError :: Publish (_) => 3 , SporeError :: Io (_) => 66 , } } }",
+      "reason": "dropped non-doc attribute(s) on method `exit_code`: # [must_use]",
+      "item_name": "impl SporeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 97,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: fmt :: Display for SporeError { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { match self { SporeError :: Publish (m) => write ! (f , \"publish-error: {m}\") , SporeError :: Io (m) => write ! (f , \"io-error: {m}\") , } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "SporeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 106,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: error :: Error for SporeError { }",
+      "reason": "trait-impl of non-prelude trait `Error` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "SporeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 108,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Build a [`Spore`] from a parsed manifest and the project root directory.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`SporeError::Publish`] when a publish input is missing/ambiguous (no germination surface for a phylum,\"] # [doc = \" no `.myc` sources, a dependency without a `hash`, or an `[spore].include` naming a non-exported nodule),\"] # [doc = \" or [`SporeError::Io`] on a read failure. No partial artifact is produced (G2).\"] pub fn build_spore (manifest : & Manifest , project_dir : & Path) -> Result < Spore , SporeError > { let kind = manifest . project . kind ; let exports = manifest . surface . as_ref () . map (| s | s . exports . clone ()) . unwrap_or_default () ; let include = manifest . spore . as_ref () . map (| s | s . include . clone ()) . filter (| i | ! i . is_empty ()) . unwrap_or_else (| | vec ! [\"surface\" . to_owned ()]) ; let mut surface : Vec < String > = Vec :: new () ; for entry in & include { if entry == \"surface\" { surface . extend (exports . iter () . cloned ()) ; } else { if manifest . surface . is_some () && ! exports . contains (entry) { return Err (SporeError :: Publish (format ! (\"[spore].include names `{entry}`, which is not in [surface].exports — refusing to \\\n                     guess the germination surface (G2)\"))) ; } surface . push (entry . clone ()) ; } } surface . sort () ; surface . dedup () ; if kind == ProjectKind :: Phylum && surface . is_empty () { return Err (SporeError :: Publish (\"a phylum must declare its public [surface].exports (or [spore].include) — there is nothing \\\n             to germinate; the surface is never guessed (G2)\" . to_owned () ,)) ; } let mut sources = collect_sources (project_dir) ? ; sources . sort_by (| a , b | a . path . cmp (& b . path)) ; if sources . is_empty () { return Err (SporeError :: Publish (format ! (\"no `.myc` sources under {} — nothing to package\" , project_dir . display ()))) ; } let mut deps = Vec :: with_capacity (manifest . dependencies . len ()) ; for d in & manifest . dependencies { let hash = d . hash . as_ref () . ok_or_else (| | { SporeError :: Publish (format ! (\"dependency `{}` has no `hash` — an unpinned dependency is not reproducible; pin it \\\n                 (`hash = \\\"blake3:…\\\"`, ADR-003/G2)\" , d . name)) }) ? ; deps . push (ResolvedDep { name : d . name . clone () , phylum : d . phylum . clone () , hash : hash . as_str () . to_owned () , version : d . version . clone () , }) ; } deps . sort_by (| a , b | a . name . cmp (& b . name)) ; let id = content_address (kind , & surface , & sources , & deps) ; Ok (Spore { id , kind , surface , sources , deps , name : manifest . project . name . clone () , version : manifest . project . version . clone () , }) }",
+      "reason": "field access on a non-`self` base — the transpiler tracks no local types, so the projection cannot be resolved to a constructor position (only `self.<field>` desugars to a `match`)",
+      "item_name": "build_spore"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 202,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The canonical, deterministic identity encoding (ADR-003) — **the single source of truth for spore\"] # [doc = \" identity**. Metadata (`name`/`version`/`authors`/…) is **excluded** — only the code-by-hash DAG, the\"] # [doc = \" dependency hash edges, the germination surface, and the project kind bear identity. Two builds of the\"] # [doc = \" same code+deps yield the same spore hash. **Downstream verifiers (e.g. `mycelium-std-spore::verify`)\"] # [doc = \" MUST call this function — never re-implement the encoding:** a parallel copy is exactly how the\"] # [doc = \" `v0`/`v1` split arose (DRY; the verify path stamped a stale `v0` while `build_spore` stamped `v1`).\"] pub fn content_address (kind : ProjectKind , surface : & [String] , sources : & [SourceFile] , deps : & [ResolvedDep] ,) -> ContentHash { let mut s = String :: from (\"mycelium-spore-v1\\n\") ; s . push_str (& format ! (\"kind:{}\\n\" , kind_str (kind))) ; s . push_str (& format ! (\"surface:{}\\n\" , surface . len ())) ; for name in surface { push_field (& mut s , name) ; } s . push_str (& format ! (\"code:{}\\n\" , sources . len ())) ; for f in sources { push_field (& mut s , & f . path) ; push_field (& mut s , f . hash . as_str ()) ; } s . push_str (& format ! (\"deps:{}\\n\" , deps . len ())) ; for d in deps { push_field (& mut s , & d . name) ; push_field (& mut s , & d . phylum) ; push_field (& mut s , & d . hash) ; } let hex = blake3 :: hash (s . as_bytes ()) . to_hex () ; ContentHash :: from_parts (\"blake3\" , hex . as_str ()) . expect (\"blake3 hex is a valid digest\") }",
+      "reason": "qualified/associated-function call `String :: from` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "content_address"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 251,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Append one length-prefixed field to the canonical pre-image: `<byte-length>:<bytes>\\\\n`. The byte\"] # [doc = \" count removes all delimiter ambiguity — the field spans exactly `v.len()` bytes, so an embedded\"] # [doc = \" space or newline cannot forge a record/field boundary (netstring-style canonicalization). This is\"] # [doc = \" what makes [`content_address`]'s `v1` encoding **injective** where `v0` was not.\"] fn push_field (s : & mut String , v : & str) { s . push_str (& format ! (\"{}:{}\\n\" , v . len () , v)) ; }",
+      "reason": "mutating method body statement is neither a `let`, a supported `self.<field>`/`*<param>` re-assignment, nor (in tail position) the method's own return value — value-threading deliberately refuses any shape outside a flat re-assignment sequence rather than risk an unsound rebind (DN-125 §6.1, never-silent G2/VR-5)",
+      "item_name": "push_field"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 259,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" The canonical `[project].kind` spelling.\"] # [must_use] pub fn kind_str (kind : ProjectKind) -> & 'static str { match kind { ProjectKind :: Phylum => \"phylum\" , ProjectKind :: Program => \"program\" , ProjectKind :: Script => \"script\" , } }",
+      "reason": "dropped non-doc attribute(s) on fn `kind_str`: # [must_use]",
+      "item_name": "kind_str"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 279,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Collect every `.myc` source under `dir` (recursively), content-addressed by raw-byte BLAKE3. Skips\"] # [doc = \" hidden entries, `target/`, and the temp files a formatter might leave — deterministic and reproducible.\"] # [doc = \"\"] # [doc = \" **Bounded + symlink-safe (DN-40 §3).** The walk **does not descend into symlinked directory\"] # [doc = \" entries** (a symlinked-directory cycle would otherwise be an unbounded/infinite walk — a build\"] # [doc = \" DoS), and it caps nesting at [`MAX_WALK_DEPTH`], returning an explicit [`SporeError::Publish`]\"] # [doc = \" (never-silent; G2) rather than overflowing the stack.\"] fn collect_sources (dir : & Path) -> Result < Vec < SourceFile > , SporeError > { let mut out = Vec :: new () ; walk (dir , dir , 0 , & mut out) ? ; Ok (out) }",
+      "reason": "qualified/associated-function call `Vec :: new` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "collect_sources"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 292,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn walk (root : & Path , dir : & Path , depth : usize , out : & mut Vec < SourceFile > ,) -> Result < () , SporeError > { if depth > MAX_WALK_DEPTH { return Err (SporeError :: Publish (format ! (\"source tree under {} nests deeper than {MAX_WALK_DEPTH} directories at {} — refusing \\\n             to recurse further (a tree this deep is not a valid layout; likely a symlink cycle or \\\n             an adversarial input). Flatten the tree or remove the offending link (DN-40/G2)\" , root . display () , dir . display () ,))) ; } let entries = std :: fs :: read_dir (dir) . map_err (| e | SporeError :: Io (format ! (\"{}: {e}\" , dir . display ()))) ? ; let mut paths : Vec < PathBuf > = entries . filter_map (| e | e . ok () . map (| e | e . path ())) . collect () ; paths . sort () ; for path in paths { let name = path . file_name () . and_then (| s | s . to_str ()) . unwrap_or_default () ; if name . starts_with ('.') || name == \"target\" { continue ; } let meta = std :: fs :: symlink_metadata (& path) . map_err (| e | SporeError :: Io (format ! (\"{}: {e}\" , path . display ()))) ? ; if meta . file_type () . is_symlink () { continue ; } if meta . is_dir () { walk (root , & path , depth + 1 , out) ? ; } else if meta . is_file () && path . extension () . is_some_and (| x | x == \"myc\") { let bytes = std :: fs :: read (& path) . map_err (| e | SporeError :: Io (format ! (\"{}: {e}\" , path . display ()))) ? ; let hex = blake3 :: hash (& bytes) . to_hex () ; let hash = ContentHash :: from_parts (\"blake3\" , hex . as_str ()) . expect (\"blake3 hex is a valid digest\") ; let rel = path . strip_prefix (root) . unwrap_or (& path) . to_string_lossy () . replace ('\\\\' , \"/\") ; out . push (SourceFile { path : rel , hash }) ; } } Ok (()) }",
+      "reason": "mutating method body statement is neither a `let`, a supported `self.<field>`/`*<param>` re-assignment, nor (in tail position) the method's own return value — value-threading deliberately refuses any shape outside a flat re-assignment sequence rather than risk an unsound rebind (DN-125 §6.1, never-silent G2/VR-5)",
+      "item_name": "walk"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 355,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The `EXPLAIN` of a built spore (no black box): the identity receipt, the surface, the code by hash, the\"] # [doc = \" dependency edges, and the metadata — the metadata explicitly marked *not* identity (ADR-003).\"] # [must_use] pub fn explain (spore : & Spore) -> String { let mut out = format ! (\"spore: {}  →  {}\\n\" , spore . name , spore . id . as_str ()) ; out . push_str (& format ! (\"  kind:    {}\\n\" , kind_str (spore . kind))) ; out . push_str (& format ! (\"  surface: {}\\n\" , spore . surface . join (\", \"))) ; out . push_str (& format ! (\"  code:    {} source file(s)\\n\" , spore . sources . len ())) ; for f in & spore . sources { out . push_str (& format ! (\"    {} {}\\n\" , f . path , f . hash . as_str ())) ; } out . push_str (& format ! (\"  deps:    {}\\n\" , spore . deps . len ())) ; for d in & spore . deps { let v = d . version . as_deref () . unwrap_or (\"*\") ; out . push_str (& format ! (\"    {} → {} {} (version {v})\\n\" , d . name , d . phylum , d . hash)) ; } let ver = spore . version . as_deref () . unwrap_or (\"—\") ; out . push_str (& format ! (\"  metadata: name={}, version={ver}  [not identity — ADR-003]\\n\" , spore . name)) ; out }",
+      "reason": "field access on a non-`self` base — the transpiler tracks no local types, so the projection cannot be resolved to a constructor position (only `self.<field>` desugars to a `match`)",
+      "item_name": "explain"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/lib.rs",
+      "line": 385,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod tests ;",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "tests"
+    }
+  ],
+  "total_top_level_items": 23
+}

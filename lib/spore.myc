@@ -1,0 +1,31 @@
+// nodule: spore_kw.bin_kw.spore_kw
+// `spore` — packaging & publishing CLI (M-368/M-732/M-871; contract
+// `docs/spec/Spore-Build-and-Publish-Contract.md`, remote backend ADR-037).
+//
+// Builds a content-addressed `spore` from a `mycelium-proj.toml` project (ADR-013) and
+// publishes/resolves it against a content-addressed registry: a **local** file store (M-732) or
+// the **remote OCI/GHCR** dense-map backend (M-871/E26-1, ADR-037) — selected once, by an explicit
+// `--registry` scheme, never guessed. Identity is the code+deps DAG (ADR-003); metadata is not
+// identity. A missing/ambiguous input is an explicit error — **no partial artifact** is ever
+// written, and a registry never silently overwrites or mis-resolves (G2).
+//
+// ```text
+// spore build    [--config <manifest>] [-o <out>]                                # build + write the spore descriptor
+// spore explain  [--config <manifest>]                                           # the identity receipt; write nothing
+// spore publish  --registry <dir|oci://…|ghcr://…> [--config <manifest>]         # publish (local store or remote OCI/GHCR)
+//                [--name <n>] [--version <v>]
+// spore resolve  <name> <version|latest> --registry <dir|oci://…|ghcr://…> [-o <out>]   # fetch a hash-verified artifact
+// ```
+//
+// `--registry` scheme routing (ADR-037 §1/§5): a bare path is the local store; `ghcr://<owner>/<repo>`
+// and `oci://<host>[/<path>]` route to the remote OCI backend (driven by the `oras` CLI — absent or
+// failing is an explicit, actionable error, never a silent skip).
+//
+// Exit codes: 0 ok · 2 manifest error · 3 publish-input · 4 not-found · 5 integrity · 6 conflict ·
+// 64 usage/unsupported · 66 I/O · 69 tool missing (`oras`) · 74 transport error.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule spore_kw.bin_kw.spore_kw;
+
+

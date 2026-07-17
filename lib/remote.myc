@@ -1,0 +1,73 @@
+// nodule: spore_kw.remote
+// `spore` **remote backend** — GHCR/OCI, distributing the DN-28 dense-map (ADR-037; M-871/E26-1).
+//
+// Extends [`crate::registry`]'s local, file-based store (M-732) with a **networked** sibling: a
+// published spore is distributed as an **OCI 1.1 artifact**, decomposed per DN-28's dense-map shape
+// (ADR-037 §2):
+//
+// ```text
+// each source object (bytes, BLAKE3 == SourceFile.hash)  ──►  one OCI blob (dedup by digest)
+// the dense-map { spore_id, kind, surface, objects, deps } ──►  the OCI config blob
+// name@version                                            ──►  the OCI tag
+// ```
+//
+// `oras` is the **v0 wire-transport driver** — it owns only the OCI HTTP mechanics; this module
+// owns the *design*: the dense-map decomposition, addressing, and fetch-and-verify. The transport
+// sits behind [`OciTransport`] so a future pure-Rust client is an append-only swap (ADR-037 §4).
+//
+// **Two content addresses, both checked, carried over from M-732 verbatim** (ADR-037 §2): every
+// fetched object's bytes must BLAKE3 to its declared `content_hash` (integrity), and the
+// reconstructed source set must recompute — via the **single canonical**
+// [`crate::content_address`] (never re-implemented; DRY, the historic v0/v1-split lesson) — to the
+// dense-map's recorded `spore_id` (identity). A missing object, a byte mismatch, an
+// extra/undescribed blob, or a `spore_id` mismatch is an explicit [`RemoteError::Integrity`], never
+// a silent partial (G2).
+//
+// **Guarantee posture (VR-5/transparency):** the whole remote path is **`Empirical`** (verified by
+// round-trip tests — a local OCI registry double here, `oras`/GHCR live elsewhere) or **`Declared`**
+// where it rests on `oras`/GHCR behavior this crate does not itself prove. Never `Proven`. `oras`
+// absent, or any nonzero exit, is an explicit, actionable [`RemoteError::ToolMissing`] /
+// [`RemoteError::Transport`] — never a silent skip.
+//
+// **KC-3:** no new runtime dependency. The dense-map codec is hand-rolled (no serde, mirroring
+// [`crate::content_address`]); the transport shells to the `oras` CLI as a subprocess.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule spore_kw.remote;
+
+// Declared: ambient Option type co-emit — oracle self-containment (G-α Rank-1 / L2-A). Type shape cites lib/std/option.myc (Some/None sum); combinators are NOT fabricated (VR-5/G2). Checker does not seed Option as prelude (unlike Bool/Unit unconditional, Vec conditional).
+type Option[A] = Some(A) | None;
+
+// EXPLAIN (G-α L2-B/DN-124): Declared co-include of batch-sibling free-fn surface (homes: spore) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Type deps on the fn line are co-included above when present in-batch. Body free-fn/method callees may still residual-poison oracle (FLAG, not silent). G2/VR-5.
+fn kind_str(kind: ProjectKind) => Bytes = match kind { Phylum => "phylum", Program => "program", Script => "script" };
+
+// A remote-backend operation refusal — always explicit, never a partial/silent result (G2). Mirrors
+// [`crate::registry::RegistryError`]'s exit-code + `Display` style so a `spore` CLI failure looks
+// the same regardless of backend.
+pub type RemoteError = InvalidInput(Bytes) | NotFound(Bytes) | Integrity(Bytes) | Conflict(Bytes) | Unsupported(Bytes) | ToolMissing(Bytes) | Transport(Bytes) | Io(Bytes);
+
+impl Show[RemoteError] for RemoteError {
+  fn render(x: RemoteError) => Bytes =
+    match x { InvalidInput(p0) => bytes_concat(bytes_concat("InvalidInput(", render(p0)), ")"), NotFound(p0) => bytes_concat(bytes_concat("NotFound(", render(p0)), ")"), Integrity(p0) => bytes_concat(bytes_concat("Integrity(", render(p0)), ")"), Conflict(p0) => bytes_concat(bytes_concat("Conflict(", render(p0)), ")"), Unsupported(p0) => bytes_concat(bytes_concat("Unsupported(", render(p0)), ")"), ToolMissing(p0) => bytes_concat(bytes_concat("ToolMissing(", render(p0)), ")"), Transport(p0) => bytes_concat(bytes_concat("Transport(", render(p0)), ")"), Io(p0) => bytes_concat(bytes_concat("Io(", render(p0)), ")") };
+};
+
+fn eq_RemoteError(a: RemoteError, b: RemoteError) => Binary{1} =
+  match a { InvalidInput(p0) => match b { InvalidInput(q0) => bytes_eq(p0, q0), _ => 0b0 }, NotFound(p0) => match b { NotFound(q0) => bytes_eq(p0, q0), _ => 0b0 }, Integrity(p0) => match b { Integrity(q0) => bytes_eq(p0, q0), _ => 0b0 }, Conflict(p0) => match b { Conflict(q0) => bytes_eq(p0, q0), _ => 0b0 }, Unsupported(p0) => match b { Unsupported(q0) => bytes_eq(p0, q0), _ => 0b0 }, ToolMissing(p0) => match b { ToolMissing(q0) => bytes_eq(p0, q0), _ => 0b0 }, Transport(p0) => match b { Transport(q0) => bytes_eq(p0, q0), _ => 0b0 }, Io(p0) => match b { Io(q0) => bytes_eq(p0, q0), _ => 0b0 } };
+
+impl RemoteError {
+  // The CLI exit code for this refusal.
+  fn exit_code(self: RemoteError) => Binary{8} = match self { InvalidInput(_) => 3, NotFound(_) => 4, Integrity(_) => 5, Conflict(_) => 6, Unsupported(_) => 64, ToolMissing(_) => 69, Transport(_) => 74, Io(_) => 66 };
+};
+
+fn kind_from_str(s: Bytes) => Option[ProjectKind] = match s { "phylum" => Some(Phylum), "program" => Some(Program), "script" => Some(Script), _ => None };
+
+// A best-effort `rm -rf` on drop — the push/pull staging directory is scratch, so cleanup failure
+// is not itself an error (the operation's own result already carries the meaningful outcome).
+type TempDirGuard = TempDirGuard(PathBuf);
+
+// The `oras`-CLI-driven [`OciTransport`] (ADR-037 §1/§4 — v0's transport). Every operation
+// preflights `oras`'s presence and surfaces a nonzero exit as an explicit [`RemoteError::Transport`]
+// (never a silent skip). Guarantee posture: **`Declared`** — correctness rests on `oras`'s own OCI
+// conformance, which this crate does not itself prove.
+pub type OrasTransport = OrasTransport(Bool);

@@ -1,0 +1,51 @@
+// nodule: spore_kw.registry
+// `spore` **registry** — publish / resolve over a content-addressed store (M-732; ADR-003/ADR-013).
+//
+// Extends the [`crate::build_spore`] artifact into a package-manager capability: a phylum author
+// **publishes** a built spore to a registry, and a downstream developer **resolves** it by
+// `name + version` and fetches the exact, hash-verified artifact.
+//
+// ## Backend (the E16-1 open question, answered honestly for v0)
+// v0 is a **local, file-based content-addressed store** — the simplest backend that preserves
+// ADR-003 identity and is never-silent on integrity. A crates.io-style networked protocol is a
+// later RFC (deferred, not faked): nothing here pretends to do remote transport or auth. Layout
+// under the registry root:
+//
+// ```text
+// <root>/objects/<algo>-<digest>.spore   the artifact bytes, addressed by BLAKE3 of those bytes
+// <root>/index/<name>/<version>          a pointer: { spore_id, artifact } → the object above
+// ```
+//
+// ## Two content addresses, both checked (ADR-003)
+// * **`spore_id`** — the spore's *identity*: BLAKE3 over the canonical code+deps+surface DAG
+//   ([`crate::Spore::id`]). Metadata (`version`) is **not** identity, so the same code republished
+//   under a new version label keeps the same `spore_id`.
+// * **`artifact`** — the *integrity* hash: BLAKE3 of the stored descriptor bytes, so a corrupted or
+//   tampered object is caught. Verified **on publish and on resolve** (DoD; G2 — never silent).
+//
+// ## Never-silent (G2)
+// Immutability is enforced: republishing a *different* artifact under an existing `name@version` is
+// a refused [`RegistryError::Conflict`], never a silent overwrite. A resolve whose object is missing
+// or whose bytes don't hash to the recorded `artifact` is a [`RegistryError::Integrity`] error. A
+// version *range* (`^1`, `~2`) is an explicit [`RegistryError::Unsupported`] — v0 resolves an exact
+// version or `latest` only, and never silently mis-resolves a constraint it cannot honestly satisfy.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule spore_kw.registry;
+
+// A registry operation refusal — always explicit, never a partial/silent result (G2).
+pub type RegistryError = InvalidInput(Bytes) | NotFound(Bytes) | Integrity(Bytes) | Conflict(Bytes) | Unsupported(Bytes) | Io(Bytes);
+
+impl Show[RegistryError] for RegistryError {
+  fn render(x: RegistryError) => Bytes =
+    match x { InvalidInput(p0) => bytes_concat(bytes_concat("InvalidInput(", render(p0)), ")"), NotFound(p0) => bytes_concat(bytes_concat("NotFound(", render(p0)), ")"), Integrity(p0) => bytes_concat(bytes_concat("Integrity(", render(p0)), ")"), Conflict(p0) => bytes_concat(bytes_concat("Conflict(", render(p0)), ")"), Unsupported(p0) => bytes_concat(bytes_concat("Unsupported(", render(p0)), ")"), Io(p0) => bytes_concat(bytes_concat("Io(", render(p0)), ")") };
+};
+
+fn eq_RegistryError(a: RegistryError, b: RegistryError) => Binary{1} =
+  match a { InvalidInput(p0) => match b { InvalidInput(q0) => bytes_eq(p0, q0), _ => 0b0 }, NotFound(p0) => match b { NotFound(q0) => bytes_eq(p0, q0), _ => 0b0 }, Integrity(p0) => match b { Integrity(q0) => bytes_eq(p0, q0), _ => 0b0 }, Conflict(p0) => match b { Conflict(q0) => bytes_eq(p0, q0), _ => 0b0 }, Unsupported(p0) => match b { Unsupported(q0) => bytes_eq(p0, q0), _ => 0b0 }, Io(p0) => match b { Io(q0) => bytes_eq(p0, q0), _ => 0b0 } };
+
+impl RegistryError {
+  // The CLI exit code for this refusal.
+  fn exit_code(self: RegistryError) => Binary{8} = match self { InvalidInput(_) => 3, NotFound(_) => 4, Integrity(_) => 5, Conflict(_) => 6, Unsupported(_) => 64, Io(_) => 66 };
+};

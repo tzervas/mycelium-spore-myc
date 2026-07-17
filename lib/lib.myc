@@ -1,0 +1,57 @@
+// nodule: spore_kw
+// `mycelium-spore` — **`spore`**, packaging & publishing (M-368; ADR-013).
+//
+// Builds a **content-addressed `spore`** from a `mycelium-proj.toml` project — the deployable unit that
+// germinates into a colony (DN-06/Glossary). The load-bearing rule is ADR-003: **identity is the
+// content-addressed DAG** (the source code by hash + the resolved dependency edges + the germination
+// surface); **metadata is not identity** (`version`/`authors`/`summary`/… travel with the spore but never
+// define it). Two builds of the same code+deps produce the **same spore hash** regardless of the version
+// label. A missing or ambiguous publish input is an **explicit error**, never a guess (G2): a phylum with
+// no surface, a project with no sources, or a dependency with no `hash` is refused — no partial artifact.
+//
+// v0 scope (honest; contract §7): a **single project** with **hash-pinned** dependencies; the on-disk
+// encoding is a **named-provisional** reproducible form (M-368 §9.1), superseded append-only when the
+// RFC-0008 R2 wire-schema lands (the signing + germination contract are deferred there per ADR-013 §4).
+// Source code is content-addressed by **raw-byte BLAKE3**; canonicalized (mycfmt) hashing is a later
+// refinement. KC-3: above the kernel.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule spore_kw;
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: spore.registry) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type RegistryError = InvalidInput(Bytes) | NotFound(Bytes) | Integrity(Bytes) | Conflict(Bytes) | Unsupported(Bytes) | Io(Bytes);
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: spore.remote) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type OrasTransport = OrasTransport(Bool);
+type RemoteError = InvalidInput(Bytes) | NotFound(Bytes) | Integrity(Bytes) | Conflict(Bytes) | Unsupported(Bytes) | ToolMissing(Bytes) | Transport(Bytes) | Io(Bytes);
+
+// A spore-build refusal — never a partial artifact (G2).
+type SporeError = Publish(Bytes) | Io(Bytes);
+
+impl Show[SporeError] for SporeError {
+  fn render(x: SporeError) => Bytes =
+    match x { Publish(p0) => bytes_concat(bytes_concat("Publish(", render(p0)), ")"), Io(p0) => bytes_concat(bytes_concat("Io(", render(p0)), ")") };
+};
+
+fn eq_SporeError(a: SporeError, b: SporeError) => Binary{1} =
+  match a { Publish(p0) => match b { Publish(q0) => bytes_eq(p0, q0), _ => 0b0 }, Io(p0) => match b { Io(q0) => bytes_eq(p0, q0), _ => 0b0 } };
+
+impl SporeError {
+  // The CLI exit code for this refusal.
+  fn exit_code(self: SporeError) => Binary{8} = match self { Publish(_) => 3, Io(_) => 66 };
+};
+
+// The canonical `[project].kind` spelling.
+pub fn kind_str(kind: ProjectKind) => Bytes = match kind { Phylum => "phylum", Program => "program", Script => "script" };
+
+// The maximum directory nesting the source walk will descend before refusing (never-silent; G2).
+//
+// A project tree this deep is **not** a legitimate `mycelium` layout — it is the signature of a
+// pathological or adversarial input (a symlink cycle, or a generated tree built to exhaust the
+// stack). The walk already refuses to follow symlinked directory entries (the primary cycle defence
+// below), so this cap is the **defence-in-depth** bound that turns "unbounded recursion ⇒ stack
+// overflow / infinite walk (build DoS)" into an **explicit, exit-coded refusal** (DN-40 §3). The
+// value is far above any plausible real nodule hierarchy.
+// Declared: co-emitted private const as zero-arg fn returning a BinLit — Mycelium has no const item production (`item` covers use/default/type/trait/impl/fn/object/lower/derive only); hand-port precedent `max_expr_depth()` (ORACLE-R1 A4; G2/VR-5: value from the Rust initializer or a known workspace-floor path, never fabricated). Use sites rewrite `NAME` → `NAME()`.
+fn MAX_WALK_DEPTH() => Binary{64} = 0b0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0100_0000; // 64

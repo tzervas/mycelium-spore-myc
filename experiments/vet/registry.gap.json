@@ -1,0 +1,240 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+  "emitted_items": [
+    "RegistryError",
+    "impl RegistryError"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 1,
+      "col": 1,
+      "category": "ReservedWord",
+      "rust_construct": "ReservedWord",
+      "snippet": "nodule spore.registry;",
+      "reason": "derived nodule path `spore.registry` has segment(s) [spore] colliding with a Mycelium reserved word — emitting them verbatim would fail to parse (`nodule spore.registry;` tokenizes the colliding word as a keyword, not an identifier); each colliding segment is escaped with the `_kw` suffix (now `spore_kw.registry`) rather than dropped, so distinct source files whose only differing segment is a reserved word (e.g. `l1.fuse` vs `l1.nodule`) stay distinguishable instead of both collapsing onto the same nodule path (G2/VR-5)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 32,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: path :: { Path , PathBuf } ;",
+      "reason": "`use std.path::Path` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.path::PathBuf` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 34,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_core :: ContentHash ;",
+      "reason": "`use mycelium_core::ContentHash` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 36,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: Spore ;",
+      "reason": "`use ::Spore` — `Spore` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 38,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The outcome of a successful [`publish`]: the receipt a CLI prints (no black box).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct PublishReceipt { # [doc = \" The published package name.\"] pub name : String , # [doc = \" The published version label (metadata; not identity — ADR-003).\"] pub version : String , # [doc = \" The spore identity (DAG hash; ADR-003).\"] pub spore_id : ContentHash , # [doc = \" The integrity hash of the stored artifact bytes (BLAKE3 of the descriptor).\"] pub artifact : ContentHash , # [doc = \" Where the object was written.\"] pub object_path : PathBuf , # [doc = \" `true` if this exact artifact was already present (idempotent re-publish), `false` if newly written.\"] pub already_present : bool , }",
+      "reason": "struct `PublishReceipt` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "PublishReceipt"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 55,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The outcome of a successful [`resolve`]: the fetched, hash-verified artifact and its identity.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct Resolved { # [doc = \" The resolved name.\"] pub name : String , # [doc = \" The concrete version selected (after resolving `latest`).\"] pub version : String , # [doc = \" The spore identity recorded at publish time (ADR-003).\"] pub spore_id : ContentHash , # [doc = \" The integrity hash the bytes were verified against.\"] pub artifact : ContentHash , # [doc = \" The fetched artifact bytes (integrity-verified before return — G2).\"] pub bytes : Vec < u8 > , }",
+      "reason": "struct `Resolved` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "Resolved"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 70,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A registry operation refusal — always explicit, never a partial/silent result (G2).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum RegistryError { # [doc = \" An invalid input: a missing/empty version label, or a `name`/`version` that is not a safe\"] # [doc = \" path component (used by both `publish` and `resolve`) (exit 3).\"] InvalidInput (String) , # [doc = \" A `name`/`version` with no index entry (exit 4).\"] NotFound (String) , # [doc = \" A content-integrity failure: the object is absent, or its bytes don't hash to the recorded\"] # [doc = \" `artifact`, or a recorded address is malformed (exit 5).\"] Integrity (String) , # [doc = \" An immutability violation: a different artifact already occupies this `name@version` (exit 6).\"] Conflict (String) , # [doc = \" A version *constraint* v0 cannot honestly satisfy (a range/caret/tilde) (exit 64).\"] Unsupported (String) , # [doc = \" An I/O error touching the registry tree (exit 66).\"] Io (String) , }",
+      "reason": "enum `RegistryError` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 70,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A registry operation refusal — always explicit, never a partial/silent result (G2).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum RegistryError { # [doc = \" An invalid input: a missing/empty version label, or a `name`/`version` that is not a safe\"] # [doc = \" path component (used by both `publish` and `resolve`) (exit 3).\"] InvalidInput (String) , # [doc = \" A `name`/`version` with no index entry (exit 4).\"] NotFound (String) , # [doc = \" A content-integrity failure: the object is absent, or its bytes don't hash to the recorded\"] # [doc = \" `artifact`, or a recorded address is malformed (exit 5).\"] Integrity (String) , # [doc = \" An immutability violation: a different artifact already occupies this `name@version` (exit 6).\"] Conflict (String) , # [doc = \" A version *constraint* v0 cannot honestly satisfy (a range/caret/tilde) (exit 64).\"] Unsupported (String) , # [doc = \" An I/O error touching the registry tree (exit 66).\"] Io (String) , }",
+      "reason": "enum `RegistryError` derive(Eq): covered by co-occurring PartialEq → `fn eq_RegistryError` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 89,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "impl RegistryError { # [doc = \" The CLI exit code for this refusal.\"] # [must_use] pub fn exit_code (& self) -> u8 { match self { RegistryError :: InvalidInput (_) => 3 , RegistryError :: NotFound (_) => 4 , RegistryError :: Integrity (_) => 5 , RegistryError :: Conflict (_) => 6 , RegistryError :: Unsupported (_) => 64 , RegistryError :: Io (_) => 66 , } } }",
+      "reason": "dropped non-doc attribute(s) on method `exit_code`: # [must_use]",
+      "item_name": "impl RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 104,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: fmt :: Display for RegistryError { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { match self { RegistryError :: InvalidInput (m) => write ! (f , \"input-error: {m}\") , RegistryError :: NotFound (m) => write ! (f , \"not-found: {m}\") , RegistryError :: Integrity (m) => write ! (f , \"integrity-error: {m}\") , RegistryError :: Conflict (m) => write ! (f , \"conflict: {m}\") , RegistryError :: Unsupported (m) => write ! (f , \"unsupported: {m}\") , RegistryError :: Io (m) => write ! (f , \"io-error: {m}\") , } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 117,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: error :: Error for RegistryError { }",
+      "reason": "trait-impl of non-prelude trait `Error` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "RegistryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 119,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" BLAKE3 the bytes into a `blake3:<hex>` [`ContentHash`] — the integrity address of an artifact.\"] # [must_use] pub fn artifact_hash (bytes : & [u8]) -> ContentHash { let hex = blake3 :: hash (bytes) . to_hex () ; ContentHash :: from_parts (\"blake3\" , hex . as_str ()) . expect (\"blake3 hex is a valid digest\") }",
+      "reason": "method call `.to_hex(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__to_hex` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `to_hex(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "artifact_hash"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 126,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The on-disk object path for an artifact hash: `<root>/objects/<algo>-<digest>.spore`. The `algo`\"] # [doc = \" prefix keeps the address self-describing and avoids a `:` in the filename.\"] fn object_path (root : & Path , hash : & ContentHash) -> PathBuf { root . join (\"objects\") . join (format ! (\"{}-{}.spore\" , hash . algo () , hash . digest ())) }",
+      "reason": "method call `.join(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__join` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `join(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "object_path"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 133,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The index pointer path for a `name@version`: `<root>/index/<name>/<version>`.\"] fn index_path (root : & Path , name : & str , version : & str) -> PathBuf { root . join (\"index\") . join (name) . join (version) }",
+      "reason": "method call `.join(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__join` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `join(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "index_path"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 138,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Reject a `name`/`version` that is not a **safe single path component**, so it can never escape the\"] # [doc = \" registry root (path traversal). `[project].name`/`version` are author-controlled strings that\"] # [doc = \" `mycelium-proj` does not constrain to path-safe forms, so the registry validates them itself here:\"] # [doc = \" empty, `.`, `..`, or any string containing `/`, `\\\\`, or a NUL is refused — never silently joined\"] # [doc = \" into a path (G2). This guards `publish`, `resolve`, and `select_version`.\"] fn safe_component (kind : & str , value : & str) -> Result < () , RegistryError > { let bad = value . is_empty () || value == \".\" || value == \"..\" || value . contains ('/') || value . contains ('\\\\') || value . contains ('\\0') ; if bad { return Err (RegistryError :: InvalidInput (format ! (\"{kind} {value:?} is not a safe path component — a registry {kind} may not be empty, `.`, \\\n             `..`, or contain `/`, `\\\\`, or NUL (refusing to escape the registry root; G2)\"))) ; } Ok (()) }",
+      "reason": "method call `.is_empty(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__is_empty` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `is_empty(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "safe_component"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 159,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "fn io < E : std :: fmt :: Display > (ctx : & str , e : E) -> RegistryError { RegistryError :: Io (format ! (\"{ctx}: {e}\")) }",
+      "reason": "type parameter `E` carries a bound — type_params/fn generics are bare identifiers only in this grammar fragment",
+      "item_name": "io"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 163,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" **Publish** `spore`'s `descriptor` bytes under `name@version` into the registry at `root`.\"] # [doc = \"\"] # [doc = \" The descriptor bytes are content-addressed (BLAKE3 → `artifact`), stored once under\"] # [doc = \" `objects/`, and pointed at by an `index/<name>/<version>` entry recording both the `artifact`\"] # [doc = \" integrity hash and the `spore_id` DAG identity (ADR-003). Idempotent for an identical\"] # [doc = \" re-publish; a *different* artifact under an existing `name@version` is a refused\"] # [doc = \" [`RegistryError::Conflict`] (immutability, G2). The integrity hash is verified by reading the\"] # [doc = \" object back after write.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RegistryError::InvalidInput`] for an empty `version`; [`RegistryError::Conflict`] on an\"] # [doc = \" immutability violation; [`RegistryError::Integrity`] if the written object fails read-back\"] # [doc = \" verification; [`RegistryError::Io`] on a filesystem failure.\"] pub fn publish (root : & Path , spore : & Spore , descriptor : & [u8] , name : & str , version : & str ,) -> Result < PublishReceipt , RegistryError > { if version . trim () . is_empty () { return Err (RegistryError :: InvalidInput (\"a publish needs a non-empty version label (it is never guessed; ADR-003 metadata)\" . to_owned () ,)) ; } safe_component (\"name\" , name) ? ; safe_component (\"version\" , version) ? ; let artifact = artifact_hash (descriptor) ; let obj = object_path (root , & artifact) ; let mut already_present = false ; if obj . exists () { let existing = std :: fs :: read (& obj) . map_err (| e | io (& obj . display () . to_string () , e)) ? ; if existing != descriptor { return Err (RegistryError :: Integrity (format ! (\"object {} exists but its bytes do not match the artifact hash — store corruption\" , obj . display ()))) ; } already_present = true ; } else { if let Some (parent) = obj . parent () { std :: fs :: create_dir_all (parent) . map_err (| e | io (& parent . display () . to_string () , e)) ? ; } std :: fs :: write (& obj , descriptor) . map_err (| e | io (& obj . display () . to_string () , e)) ? ; let back = std :: fs :: read (& obj) . map_err (| e | io (& obj . display () . to_string () , e)) ? ; if artifact_hash (& back) != artifact { return Err (RegistryError :: Integrity (format ! (\"post-write verification of {} failed — artifact hash mismatch\" , obj . display ()))) ; } } let idx = index_path (root , name , version) ; let entry = format_entry (& spore . id , & artifact) ; if idx . exists () { let existing = std :: fs :: read_to_string (& idx) . map_err (| e | io (& idx . display () . to_string () , e)) ? ; let (prev_id , prev_art) = parse_entry (& existing) . map_err (| e | RegistryError :: Integrity (format ! (\"{} — {e}\" , idx . display ()))) ? ; if prev_id != spore . id || prev_art != artifact { return Err (RegistryError :: Conflict (format ! (\"{name}@{version} is already published with a different artifact \\\n                 (have spore_id={}, artifact={}); publishing a new artifact requires a new version \\\n                 — a registry is immutable (G2)\" , prev_id . as_str () , prev_art . as_str ()))) ; } } else { if let Some (parent) = idx . parent () { std :: fs :: create_dir_all (parent) . map_err (| e | io (& parent . display () . to_string () , e)) ? ; } std :: fs :: write (& idx , entry) . map_err (| e | io (& idx . display () . to_string () , e)) ? ; } Ok (PublishReceipt { name : name . to_owned () , version : version . to_owned () , spore_id : spore . id . clone () , artifact , object_path : obj , already_present , }) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "publish"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 257,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" **Resolve** `name` at `constraint` against the registry at `root`, returning the integrity-verified\"] # [doc = \" artifact. `constraint` is either an **exact version** (`\\\"1.2.0\\\"`) or `\\\"latest\\\"` / `\\\"*\\\"` (the\"] # [doc = \" highest published version). A *range* constraint (`^`, `~`, `>=`) is [`RegistryError::Unsupported`]\"] # [doc = \" — v0 never silently mis-resolves a SemVer range it cannot honestly evaluate (the range backend is\"] # [doc = \" the deferred ADR-018 work).\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" [`RegistryError::NotFound`] if no matching `name`/version exists; [`RegistryError::Unsupported`]\"] # [doc = \" for a range constraint; [`RegistryError::Integrity`] if the object is missing or its bytes fail\"] # [doc = \" the `artifact` hash check; [`RegistryError::Io`] on a filesystem failure.\"] pub fn resolve (root : & Path , name : & str , constraint : & str) -> Result < Resolved , RegistryError > { safe_component (\"name\" , name) ? ; let version = select_version (root , name , constraint) ? ; let idx = index_path (root , name , & version) ; let entry = std :: fs :: read_to_string (& idx) . map_err (| _ | { RegistryError :: NotFound (format ! (\"{name}@{version} has no registry index entry\")) }) ? ; let (spore_id , artifact) = parse_entry (& entry) . map_err (| e | RegistryError :: Integrity (format ! (\"{} — {e}\" , idx . display ()))) ? ; let obj = object_path (root , & artifact) ; let bytes = std :: fs :: read (& obj) . map_err (| _ | { RegistryError :: Integrity (format ! (\"{name}@{version} index points at a missing object {} (store corruption)\" , obj . display ())) }) ? ; if artifact_hash (& bytes) != artifact { return Err (RegistryError :: Integrity (format ! (\"{name}@{version}: fetched object {} does not match its content address {} — tampered or corrupt\" , obj . display () , artifact . as_str ()))) ; } Ok (Resolved { name : name . to_owned () , version , spore_id , artifact , bytes , }) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "resolve"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 303,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Choose the concrete version for `constraint`: an exact match, or the highest published version for\"] # [doc = \" `latest`/`*`. A range constraint is refused (unsupported in v0; never silently mis-resolved).\"] fn select_version (root : & Path , name : & str , constraint : & str) -> Result < String , RegistryError > { let c = constraint . trim () ; if c . is_empty () { return Err (RegistryError :: NotFound (format ! (\"{name}: an empty version constraint resolves nothing (it is never guessed)\"))) ; } if c == \"latest\" || c == \"*\" { let mut versions = published_versions (root , name) ? ; versions . sort_by_key (| v | version_key (v)) ; return versions . pop () . ok_or_else (| | RegistryError :: NotFound (format ! (\"{name}: no versions published\"))) ; } if c . starts_with (['^' , '~' , '>' , '<' , '=']) || c . contains (',') { return Err (RegistryError :: Unsupported (format ! (\"version constraint {c:?} is a range — v0 resolves an exact version or `latest` only; \\\n             SemVer range resolution is the deferred ADR-018 work, not silently approximated (VR-5)\"))) ; } safe_component (\"version\" , c) ? ; if index_path (root , name , c) . exists () { Ok (c . to_owned ()) } else { Err (RegistryError :: NotFound (format ! (\"{name}@{c} is not published\"))) } }",
+      "reason": "method call `.trim(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__trim` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `trim(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "select_version"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 337,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The published version labels for `name` (the filenames under `index/<name>/`).\"] fn published_versions (root : & Path , name : & str) -> Result < Vec < String > , RegistryError > { let dir = root . join (\"index\") . join (name) ; let rd = std :: fs :: read_dir (& dir) . map_err (| _ | RegistryError :: NotFound (format ! (\"{name}: not published in this registry\"))) ? ; let mut out = Vec :: new () ; for e in rd { let e = e . map_err (| err | io (& dir . display () . to_string () , err)) ? ; if e . path () . is_file () { if let Some (v) = e . file_name () . to_str () { out . push (v . to_owned ()) ; } } } Ok (out) }",
+      "reason": "method call `.join(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__join` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `join(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "published_versions"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 354,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" A coarse version sort key: dotted numeric components compared numerically, with a lexical\"] # [doc = \" fallback for non-numeric parts. Honest scope (`Declared`): this orders simple `MAJOR.MINOR.PATCH`\"] # [doc = \" labels for `latest`; it is **not** a full SemVer precedence implementation (pre-release/build\"] # [doc = \" metadata are not interpreted) — that is the deferred ADR-018 work.\"] # [doc = \"\"] # [doc = \" `pub(crate)` so [`crate::remote::resolve_remote`] reuses the same `latest`-selection ordering\"] # [doc = \" instead of re-deriving it (DRY; ADR-037 §2 explicitly asks for reuse here).\"] pub (crate) fn version_key (v : & str) -> Vec < (u64 , String) > { v . split ('.') . map (| part | { let num = part . chars () . take_while (char :: is_ascii_digit) . collect :: < String > () ; (num . parse :: < u64 > () . unwrap_or (0) , part . to_owned ()) }) . collect () }",
+      "reason": "method call `.collect(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__collect` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `collect(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "version_key"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 373,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The two-line index-entry encoding: `spore_id` (identity) + `artifact` (integrity).\"] # [doc = \" `pub(crate)` for white-box in-crate test access (CLAUDE.md test-layout rule); not a public API.\"] pub (crate) fn format_entry (spore_id : & ContentHash , artifact : & ContentHash) -> String { format ! (\"spore_id = {}\\nartifact = {}\\n\" , spore_id . as_str () , artifact . as_str ()) }",
+      "reason": "Rust ownership/identity-conversion no-op method `.as_str()` has no Mycelium free-function/prim referent (value semantics — ADR-003); desugaring it to a bare `as_str(recv)` would fabricate an unknown prim (`unknown function/constructor/prim `as_str`` — verified against the oracle), so it is gapped, never fake-emitted (G2/VR-5)",
+      "item_name": "format_entry"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-spore/src/registry.rs",
+      "line": 383,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Parse a [`format_entry`] index entry back into `(spore_id, artifact)`. **Total and strict**: every\"] # [doc = \" line must be either blank or a recognized `key = value` (`spore_id`/`artifact`), and a key may occur\"] # [doc = \" at most **once**. On any malformed/missing/duplicate/unrecognized field this returns an explicit\"] # [doc = \" [`RegistryError::Integrity`] **naming the offending line/key** — never a silent default, never a\"] # [doc = \" silent last-wins, never a silently-ignored stray line (G2). A corrupt or hand-edited index entry is\"] # [doc = \" thus caught at read-back, not papered over.\"] # [doc = \" `pub(crate)` for white-box in-crate test access (CLAUDE.md test-layout rule); not a public API.\"] pub (crate) fn parse_entry (text : & str) -> Result < (ContentHash , ContentHash) , RegistryError > { let mut spore_id = None ; let mut artifact = None ; for line in text . lines () { if line . trim () . is_empty () { continue ; } let Some ((k , v)) = line . split_once ('=') else { return Err (RegistryError :: Integrity (format ! (\"malformed index entry: line {line:?} is neither blank nor a `key = value` pair \\\n                 (refusing to silently ignore an unrecognized line; G2)\"))) ; } ; let key = k . trim () ; let value = v . trim () ; let slot = match key { \"spore_id\" => & mut spore_id , \"artifact\" => & mut artifact , other => { return Err (RegistryError :: Integrity (format ! (\"malformed index entry: unrecognized key {other:?} in line {line:?} \\\n                     (expected `spore_id` or `artifact`; refusing to silently ignore it; G2)\"))) ; } } ; if slot . is_some () { return Err (RegistryError :: Integrity (format ! (\"malformed index entry: duplicate `{key}` line {line:?} — a key occurs at most once \\\n                 (refusing last-wins; G2)\"))) ; } let parsed = ContentHash :: parse (value) . ok_or_else (| | { RegistryError :: Integrity (format ! (\"malformed index entry: `{key}` value {value:?} is not a valid content hash (G2)\")) }) ? ; * slot = Some (parsed) ; } let spore_id = spore_id . ok_or_else (| | { RegistryError :: Integrity (\"malformed index entry: missing `spore_id` line (G2)\" . to_owned ()) }) ? ; let artifact = artifact . ok_or_else (| | { RegistryError :: Integrity (\"malformed index entry: missing `artifact` line (G2)\" . to_owned ()) }) ? ; Ok ((spore_id , artifact)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "parse_entry"
+    }
+  ],
+  "total_top_level_items": 21
+}
